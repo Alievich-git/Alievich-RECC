@@ -1,0 +1,9 @@
+Campaign structure:
+
+1- Campaign level: one campaign
+2- AdSet level: one adset per creative. All adsets are clones of each other: same targeting, same audience, same placements, same budget, same schedule. The only reason multiple adsets exist is to isolate each creative
+3- Ad level: each adset contains exactly one ad. Same primary text, same CTA, same headline across all ads. The only variable is the visual (image or video)
+
+---
+The creatives are the only variable. Everything else is held constant across all adsets.
+---
