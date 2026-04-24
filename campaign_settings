@@ -1,0 +1,52 @@
+CAMPAIGN SETTINGS:
+
+
+### CAMPAIGN LEVEL
+- Buying type: AUCTION
+- Objective: OUTCOME_LEADS
+- Campaign Budget Optimization: OFF (budget at ad set level)
+- Bid Strategy: LOWEST_COST_WITHOUT_CAP (Highest Volume)
+- Status: PAUSED (always create as paused so user can review before publishing)
+- Special ad categories: NONE
+- A/B test: OFF
+
+### AD SET LEVEL
+- Conversion location: ON_AD (Instant Forms)
+- Performance goal: LEAD_GENERATION
+- Dynamic creative: OFF
+- Daily budget: 50
+- Optimization goal: LEAD_GENERATION
+- Billing event: IMPRESSIONS
+- Location targeting: Cairo, Cairo Governorate, Egypt with 35 mile radius
+  (you can use geo coordinates: latitude 30.0444, longitude 31.2357, radius 35 miles)
+- Reach more people: OFF (no audience expansion)
+- Age min: 30
+- Age max: 65 (which means 65+)
+- Use selected age as suggestion: OFF
+- Gender: All (1 and 2)
+- Detailed Targeting (hardcode these exact interest IDs if possible, otherwise use name-based targeting):
+  * Lives abroad
+  * Frequent international travelers
+  * Business class (air travel)
+  * First class travel (travel & tourism business)
+  * Penthouse apartment (real estate)
+  * Real estate investing (investing)
+  * Residential area (real estate)
+  * Townhouse (architecture)
+  * Villa (lodging)
+- Publisher platforms: facebook, instagram
+- Facebook positions: feed, profile_feed, notification_feeds, reels, search
+- Instagram positions: stream (feed), profile_feed, reels
+- In-stream ads for reels: OFF
+- Apps and sites: OFF
+- Marketing messages: OFF
+- Allow limited spend to excluded placements: OFF
+
+### AD LEVEL
+- Headline (hardcoded, always this exact text): 🟢 لمزيد من التفاصيل اضغط على Sign Up 🟢
+- Call to action: SIGN_UP
+- Advantage+ creative enhancements: ALL OFF
+- Essential enhancements: ALL OFF
+- Ad format: single image or video based on what user uploaded
+
+---

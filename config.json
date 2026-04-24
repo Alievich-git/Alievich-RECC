@@ -1,0 +1,47 @@
+{
+  "campaign_name": "Real Estate Exclusive Campaign",
+  "daily_budget": 5500,
+  "adset_name": "Cairo Real Estate Audience",
+  "targeting": {
+    "geo_locations": {
+      "cities": [
+        {
+          "key": "658536",
+          "radius": 35,
+          "distance_unit": "mile"
+        }
+      ]
+    },
+    "age_min": 30,
+    "age_max": 65,
+    "flexible_spec": [
+      {
+        "interests": [
+          {"id": "6003076027139", "name": "First-class travel"},
+          {"id": "6003352779232", "name": "Business class"},
+          {"id": "6003055396585", "name": "Penthouse apartment"},
+          {"id": "6003431489469", "name": "Residential area"},
+          {"id": "6003066082870", "name": "Townhouse"},
+          {"id": "6003431352069", "name": "Villa"}
+        ]
+      }
+    ],
+    "targeting_automation": { "advantage_audience": 0 },
+    "publisher_platforms": ["facebook", "instagram"],
+    "facebook_positions": ["feed", "profile_feed", "facebook_reels", "search"],
+    "instagram_positions": ["stream", "profile_feed", "reels", "explore"]
+  },
+  "form_name": "Real Estate VIP Lead Form",
+  "form_questions": [
+    {"type": "FULL_NAME"},
+    {"type": "EMAIL"},
+    {"type": "PHONE"}
+  ],
+  "privacy_policy_url": "https://partnersoutsourcing.com/privacy-policy/",
+  "website_url": "https://partnersoutsourcing.com",
+  "creative_name": "Real Estate Ad Creative",
+  "ad_message": "Invest in the most luxurious and modern housing options. Sign up to get all details.",
+  "ad_headline": "🟢 لمزيد من التفاصيل اضغط على Sign Up 🟢",
+  "ad_name": "Single Image Real Estate Ad",
+  "ad_image_path": "ad_image.png"
+}
