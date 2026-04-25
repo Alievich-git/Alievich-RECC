@@ -160,7 +160,7 @@ def save_credentials():
 @app.route('/api/deploy_campaign', methods=['POST'])
 def deploy_campaign():
     try:
-        data = request.form
+        data = request.json if request.is_json else request.form
         
         # 1. Extract Credentials dynamically
         app_id = data.get('app_id', '').strip()
@@ -204,15 +204,21 @@ def deploy_campaign():
             config['daily_budget'] = int(float(daily_budget) * 100)
 
         # 2. Handle Files
-        files = request.files.getlist('files[]')
+        files_data = data.get('files_base64', [])
         media_files = []
-        if not files or files[0].filename == '':
+        
+        legacy_files = request.files.getlist('files[]')
+        if not files_data and (not legacy_files or legacy_files[0].filename == ''):
             return jsonify({'success': False, 'message': 'No media files uploaded'}), 400
             
-        for file in files:
-            filename = secure_filename(file.filename)
+        import base64
+        for file_obj in files_data:
+            filename = secure_filename(file_obj['name'])
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(file_path)
+            
+            b64_str = file_obj['data'].split(',')[1] if ',' in file_obj['data'] else file_obj['data']
+            with open(file_path, 'wb') as f:
+                f.write(base64.b64decode(b64_str))
             
             # Universal Force-Normalization for Meta Ads
             ext = filename.split('.')[-1].lower()

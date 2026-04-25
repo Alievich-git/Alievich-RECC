@@ -108,14 +108,25 @@ document.addEventListener('DOMContentLoaded', () => {
         progressBar.classList.remove('pulse');
         progressText.textContent = '0%';
 
-        const formData = new FormData(form);
-        formData.delete('files[]');
-        for(let file of uploadedFiles.files) {
-            formData.append('files[]', file);
+        const payload = {};
+        for (let [key, value] of new FormData(form).entries()) {
+            if (key !== 'files[]') payload[key] = value;
         }
 
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/deploy_campaign', true);
+        const filesPromises = Array.from(uploadedFiles.files).map(file => {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve({ name: file.name, data: reader.result });
+                reader.readAsDataURL(file);
+            });
+        });
+
+        Promise.all(filesPromises).then(filesBase64 => {
+            payload.files_base64 = filesBase64;
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/deploy_campaign', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
 
         xhr.upload.onprogress = function(event) {
             if (event.lengthComputable) {
@@ -169,7 +180,12 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
             finishUpload();
         };
 
-        xhr.send(formData);
+        xhr.send(JSON.stringify(payload));
+        
+        }).catch(err => {
+            alert('Error processing files for upload.');
+            finishUpload();
+        });
 
         function finishUpload() {
             submitBtn.disabled = false;
@@ -234,7 +250,7 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
         const name = nameInput.value.trim();
         if(!name) return;
         
-        const formData = new FormData();
+        const formData = new URLSearchParams();
         formData.append('name', name);
         
         fetch('/api/create_profile', {
@@ -250,7 +266,7 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
     }
 
     window.switchProfile = function(id) {
-        const formData = new FormData();
+        const formData = new URLSearchParams();
         formData.append('profile_id', id);
         
         fetch('/api/switch_profile', {
@@ -267,7 +283,7 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
         const btn = document.getElementById('saveCredsBtn');
         const msg = document.getElementById('saveCredsMsg');
         
-        const formData = new FormData(document.getElementById('deployForm'));
+        const formData = new URLSearchParams(new FormData(document.getElementById('deployForm')));
         
         btn.disabled = true;
         btn.textContent = 'Saving...';
