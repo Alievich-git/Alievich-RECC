@@ -3,48 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meta Ads Auto-Deployer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>RECC | By Alievich</title>
+    <!-- Dynamic Favicons for OS Modes & Mobile -->
+    <link rel="icon" type="image/png" href="/static/images/favicon-black.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" media="(prefers-color-scheme: dark)">
+    <link rel="shortcut icon" href="/static/images/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon-seo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@800;900&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
-    <div class="background-blobs">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-    </div>
+    <div id="particles-js"></div>
+    <div class="ambient-glow"></div>
 
     <div class="container">
-        <header>
-            <h1>Meta Ads <span>Auto-Deployer</span></h1>
-            <p>Programmatically generate multiple isolated adsets identically from a single campaign in one click.</p>
+        <header class="hero-header fade-up">
+            <a href="https://alievich.roienv.com/" target="_blank" style="display: inline-block;">
+                <img src="/static/images/alivich-logo.webp" alt="Alievich Brand Logo" class="top-brand-logo">
+            </a>
+            <h1 class="logo-title">RECC</h1>
+            <p class="hero-subtitle">Real Estate Campaign Creator</p>
+            <div class="creator-badge">
+                Built by <a href="https://alievich.roienv.com/" target="_blank" class="author-link">Ali Alievich <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a>
+            </div>
         </header>
 
-        <form id="deployForm" enctype="multipart/form-data">
+        <div class="glass-panel description-card fade-up delay-1">
+            <h3 class="desc-headline">Deploy dozens of Meta campaigns in <span>one click</span>.</h3>
+            <p class="desc-subline">No manual duplication. No human error. No wasted hours. Just an <span>80% faster</span> way to launch real estate campaigns at scale.</p>
+        </div>
+
+        <form id="deployForm" enctype="multipart/form-data" class="fade-up delay-2">
             
             <section class="glass-panel">
-                <h2>1. Connection Credentials <span class="tooltip" title="Find these in your Meta Developer Portal and Meta Business Settings. The Token should be a System User Access Token.">?</span></h2>
+                <h2>1. Connection Credentials</h2>
+                <p class="helper-intro">Don't know where to find these? Click the <strong>How to get this <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></strong> links next to each field.</p>
+                
                 <div class="grid-2">
                     <div class="input-group">
-                        <label>Meta App ID</label>
+                        <label>Meta App ID <span class="help-toggle" onclick="toggleHelp('app-id-help')">How to get this <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span></label>
                         <input type="text" id="app_id" name="app_id" required placeholder="e.g. 1029384756">
+                        <div class="helper-text hidden" id="app-id-help">
+                            <strong>Step 1:</strong> Go to <a href="https://developers.facebook.com/" target="_blank">Meta for Developers</a> and log in.<br>
+                            <strong>Step 2:</strong> Click <strong>My Apps</strong> -> <strong>Create App</strong>.<br>
+                            <strong>Step 3:</strong> Select <strong>"Other"</strong> as the use case, then select <strong>"Business"</strong>.<br>
+                            <strong>Step 4:</strong> Enter any name (e.g. AutoDeployer) and click <strong>Create App</strong>.<br>
+                            <strong>Step 5:</strong> Look at the left menu: Click <strong>App Settings -> Basic</strong>. Your App ID will be right there.<br>
+                            <strong>Step 6:</strong> ⚠️ You must <strong>Publish</strong> the app! In the top navbar, toggle the "App Mode" switch from <em>Development</em> to <strong>Live</strong>. <em>(Note: You may be required to paste a Privacy Policy URL in Basic Settings before it switches).</em>
+                        </div>
                     </div>
                     <div class="input-group">
-                        <label>Meta App Secret</label>
+                        <label>Meta App Secret <span class="help-toggle" onclick="toggleHelp('app-secret-help')">How to get this <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span></label>
                         <input type="password" id="app_secret" name="app_secret" required placeholder="••••••••••••••••">
+                        <div class="helper-text hidden" id="app-secret-help">
+                            <strong>Step 1:</strong> Found in the exact same place as your App ID.<br>
+                            <strong>Step 2:</strong> Go to <strong>App Settings -> Basic</strong>.<br>
+                            <strong>Step 3:</strong> Next to your App ID, you'll see <strong>App Secret</strong>. Click "Show", type your facebook password if asked, and copy the code.
+                        </div>
                     </div>
                 </div>
                 <div class="input-group">
-                    <label>System User Access Token</label>
-                    <input type="password" id="access_token" name="access_token" required placeholder="EAABw...">
+                    <label>System User Access Token <span class="help-toggle" onclick="toggleHelp('token-help')">How to get this <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span></label>
+                    <input type="password" id="access_token" name="access_token" required placeholder="EAA...">
+                    <div class="helper-text hidden" id="token-help">
+                        <em>Warning: Do NOT use a standard user token or it will expire instantly.</em><br><br>
+                        <strong>Step 1:</strong> Go to your <a href="https://business.facebook.com/settings" target="_blank">Meta Business Settings</a>.<br>
+                        <strong>Step 2:</strong> On the left menu, under <strong>Users</strong>, click <strong>System Users</strong>.<br>
+                        <strong>Step 3:</strong> Click <strong>Add</strong>. Name the user and give them an <strong>Admin</strong> role.<br>
+                        <strong>Step 4:</strong> Click <strong>Add Assets</strong>. Select your Ad Account and Facebook Page, giving the system user "Full Control" over them.<br>
+                        <strong>Step 5:</strong> Click <strong>Generate New Token</strong>. Select your new Meta App from the dropdown list.<br>
+                        <strong>Step 6:</strong> Crucial: Check these 4 boxes: <code>ads_management</code>, <code>pages_manage_ads</code>, <code>pages_read_engagement</code>, and <code>leads_retrieval</code>.<br>
+                        <strong>Step 7:</strong> Click Generate. Copy the extremely long token that begins with <strong>EAA...</strong>
+                    </div>
                 </div>
                 <div class="grid-2">
                     <div class="input-group">
-                        <label>Ad Account ID (without act_)</label>
-                        <input type="text" id="ad_account_id" name="ad_account_id" required placeholder="1160253345514470">
+                        <label>Ad Account ID <span class="help-toggle" onclick="toggleHelp('ad-account-help')">How to get this <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span></label>
+                        <input type="text" id="ad_account_id" name="ad_account_id" required placeholder="e.g. 11602533455">
+                        <div class="helper-text hidden" id="ad-account-help">
+                            <strong>Step 1:</strong> In your <a href="https://business.facebook.com/settings" target="_blank">Meta Business Settings</a>, click <strong>Accounts -> Ad Accounts</strong> on the left menu.<br>
+                            <strong>Step 2:</strong> Click your ad account in the list.<br>
+                            <strong>Step 3:</strong> You will see a long ID number below the name at the top. Just paste those numbers here.
+                        </div>
                     </div>
                     <div class="input-group">
-                        <label>Facebook Page ID</label>
-                        <input type="text" id="page_id" name="page_id" required placeholder="911989011989264">
+                        <label>Facebook Page ID <span class="help-toggle" onclick="toggleHelp('page-help')">How to get this <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span></label>
+                        <input type="text" id="page_id" name="page_id" required placeholder="e.g. 91198901198">
+                        <div class="helper-text hidden" id="page-help">
+                            <strong>Step 1:</strong> Go to your Facebook Business Page on normal Facebook.<br>
+                            <strong>Step 2:</strong> Go to the <strong>About</strong> section -> <strong>Page Transparency</strong>.<br>
+                            <strong>Step 3:</strong> You will see your Page ID there (usually 15 digits).
+                        </div>
                     </div>
                 </div>
             </section>
@@ -57,8 +108,21 @@
                 </div>
                 
                 <div class="input-group">
-                    <label>Daily Budget per creative (e.g., 350)</label>
-                    <input type="number" id="daily_budget" name="daily_budget" placeholder="350" min="1" step="0.01" required>
+                    <label>Daily Budget per creative <span class="help-toggle" onclick="toggleHelp('budget-help')">Currency Match Required <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></span></label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="daily_budget" name="daily_budget" placeholder="350" min="1" step="0.01" required style="flex: 2;">
+                        <select name="currency" id="currency" style="flex: 1;">
+                            <option value="EGP">EGP</option>
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="GBP">GBP</option>
+                            <option value="AED">AED</option>
+                            <option value="SAR">SAR</option>
+                        </select>
+                    </div>
+                    <div class="helper-text hidden" id="budget-help">
+                        ⚠️ <strong>CRITICAL:</strong> The currency you choose here <strong>MUST match</strong> the default currency configured inside your Meta Ad Account. Facebook calculates your numerical budget based strictly on your account settings!
+                    </div>
                 </div>
 
                 <div class="upload-zone" id="drop-zone">
