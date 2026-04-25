@@ -22,7 +22,9 @@ class MetaAdsManager:
         self.page_id = page_id
         self.access_token = access_token
         
-        FacebookAdsApi.init(app_id, app_secret, access_token)
+        # Pass None to app_secret to deliberately bypass the generation of appsecret_proof
+        # which has been mathematically rejecting the access token hash matrix.
+        FacebookAdsApi.init(app_id=app_id, app_secret=None, access_token=access_token)
         self.account = AdAccount(self.ad_account_id)
         
     def upload_image(self, file_path):

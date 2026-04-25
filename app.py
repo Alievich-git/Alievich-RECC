@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024 # 50MB max per request
+app.config['MAX_CONTENT_LENGTH'] = 1000 * 1024 * 1024 # 1GB max per request
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
@@ -24,11 +24,11 @@ def deploy_campaign():
         data = request.form
         
         # 1. Extract Credentials dynamically
-        app_id = data.get('app_id')
-        app_secret = data.get('app_secret')
-        access_token = data.get('access_token')
-        ad_account_id = data.get('ad_account_id')
-        page_id = data.get('page_id')
+        app_id = data.get('app_id', '').strip()
+        app_secret = data.get('app_secret', '').strip()
+        access_token = data.get('access_token', '').strip()
+        ad_account_id = data.get('ad_account_id', '').strip()
+        page_id = data.get('page_id', '').strip()
         
         if not all([app_id, app_secret, access_token, ad_account_id, page_id]):
             return jsonify({'success': False, 'message': 'Missing Meta credentials'}), 400
@@ -41,6 +41,8 @@ def deploy_campaign():
             return jsonify({'success': False, 'message': 'Engine error: missing internal config.json'}), 500
 
         # Override user inputs
+        config['campaign_name'] = "Ali Alievich | RECC"
+        
         primary_text = data.get('primary_text')
         if primary_text:
             config['ad_message'] = primary_text
@@ -61,6 +63,23 @@ def deploy_campaign():
             filename = secure_filename(file.filename)
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
+            
+            # Universal Force-Normalization for Meta Ads
+            ext = filename.split('.')[-1].lower()
+            if ext not in ['mp4', 'mov', 'avi']: # If it's not a video, force it to be a clean JPEG
+                try:
+                    from PIL import Image
+                    img = Image.open(file_path)
+                    new_path = file_path + '.jpg'
+                    if img.mode in ("RGBA", "P"): 
+                        img = img.convert("RGB")
+                    img.save(new_path, 'JPEG', quality=95)
+                    os.remove(file_path)
+                    file_path = new_path
+                    logger.info(f"Force-normalized image to JPEG: {new_path}")
+                except Exception as e:
+                    logger.warning(f"Could not normalize image {filename}: {e}")
+                    
             media_files.append(file_path)
             
         config['media_files'] = media_files

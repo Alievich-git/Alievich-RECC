@@ -97,7 +97,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         submitBtn.disabled = true;
         btnLoader.classList.remove('hidden');
-        btnText.textContent = 'Deploying via Meta SDK... (Do not close)';
+        btnText.textContent = 'Uploading Media... (Do not close)';
+
+        // Setup Progress Bar
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+        progressContainer.classList.remove('hidden');
+        progressBar.style.width = '0%';
+        progressBar.classList.remove('pulse');
+        progressText.textContent = '0%';
 
         const formData = new FormData(form);
         formData.delete('files[]');
@@ -105,15 +114,37 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('files[]', file);
         }
 
-        try {
-            const response = await fetch('/api/deploy_campaign', {
-                method: 'POST',
-                body: formData
-            });
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/deploy_campaign', true);
 
-            const result = await response.json();
+        xhr.upload.onprogress = function(event) {
+            if (event.lengthComputable) {
+                // Authentic physical upload tracking for real-world file traversal
+                const percentComplete = Math.round((event.loaded / event.total) * 100);
+                
+                progressBar.style.width = percentComplete + '%';
+                progressText.textContent = percentComplete + '%';
+                
+                if (percentComplete === 100) {
+                    btnText.textContent = 'Executing Meta APIs... (Please wait)';
+                    progressBar.classList.add('pulse');
+                }
+            }
+        };
 
-            if(response.ok && result.success) {
+        xhr.onload = function() {
+            progressBar.classList.remove('pulse');
+            progressBar.style.width = '100%';
+            progressText.textContent = '100%';
+            
+            let result;
+            try {
+                result = JSON.parse(xhr.responseText);
+            } catch(e) {
+                result = { success: false, message: "Invalid JSON response from server." };
+            }
+
+            if (xhr.status === 200 && result.success) {
                 modalTitle.textContent = "Deployment Successful!";
                 modalMessage.textContent = "Your Meta Ads campaign has been completely generated in a PAUSED state.";
                 modalData.innerHTML = `
@@ -128,14 +159,24 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
                 modalMessage.textContent = "The internal Meta Ads engine encountered an error.";
                 modalData.textContent = result.message || "Unknown error";
             }
-        } catch(error) {
+            finishUpload();
+        };
+
+        xhr.onerror = function() {
             modalTitle.textContent = "Deployment Failed!";
             modalMessage.textContent = "Network or server error while executing sequence.";
-            modalData.textContent = error.toString();
-        } finally {
+            modalData.textContent = "XHR Request Error";
+            finishUpload();
+        };
+
+        xhr.send(formData);
+
+        function finishUpload() {
             submitBtn.disabled = false;
             btnLoader.classList.add('hidden');
             btnText.textContent = 'Launch Campaign';
+            progressBar.classList.remove('pulse');
+            progressContainer.classList.add('hidden');
             modal.classList.remove('hidden');
         }
     });

@@ -17,12 +17,16 @@
     "flexible_spec": [
       {
         "interests": [
-          {"id": "6003076027139", "name": "First-class travel"},
-          {"id": "6003352779232", "name": "Business class"},
-          {"id": "6003055396585", "name": "Penthouse apartment"},
-          {"id": "6003431489469", "name": "Residential area"},
-          {"id": "6003066082870", "name": "Townhouse"},
-          {"id": "6003431352069", "name": "Villa"}
+          {"id": "6003352779232", "name": "Business class (air travel)"},
+          {"id": "6003055396585", "name": "penthouse apartment (property)"},
+          {"id": "6849417269780", "name": "Residential property (property)"},
+          {"id": "6003066082870", "name": "Townhouse (architecture)"},
+          {"id": "6003431352069", "name": "Villa (lodging)"},
+          {"id": "6003446239080", "name": "Property investing (investing)"}
+        ],
+        "behaviors": [
+          {"id": "6015559470583", "name": "Lives abroad"},
+          {"id": "6022788483583", "name": "Frequent international travelers"}
         ]
       }
     ],
