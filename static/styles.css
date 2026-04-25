@@ -330,3 +330,13 @@ button { font-family: 'General Sans', sans-serif; cursor: pointer; border: none;
 .loader.hidden { display: none; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } .logo-title { font-size: 60px; } }
+
+/* Hide Native Number Spinners */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}

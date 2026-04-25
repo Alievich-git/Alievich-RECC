@@ -211,4 +211,85 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
             "retina_detect": true
         });
     }
+    // Profile Command Center Logic
+    const profileBtn = document.getElementById('profileBtn');
+    const profileDropdown = document.getElementById('profileDropdown');
+    const profileContainer = document.getElementById('profileContainer');
+    
+    if (profileBtn && profileDropdown && profileContainer) {
+        profileBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            profileDropdown.style.display = profileDropdown.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!profileContainer.contains(e.target)) {
+                profileDropdown.style.display = 'none';
+            }
+        });
+    }
+
+    window.createProfile = function() {
+        const nameInput = document.getElementById('newProfileName');
+        const name = nameInput.value.trim();
+        if(!name) return;
+        
+        const formData = new FormData();
+        formData.append('name', name);
+        
+        fetch('/api/create_profile', {
+            method: 'POST',
+            body: formData
+        }).then(res => res.json()).then(data => {
+            if(data.success) {
+                window.location.reload();
+            } else {
+                alert(data.message || 'Error creating profile');
+            }
+        }).catch(err => alert("Network Error"));
+    }
+
+    window.switchProfile = function(id) {
+        const formData = new FormData();
+        formData.append('profile_id', id);
+        
+        fetch('/api/switch_profile', {
+            method: 'POST',
+            body: formData
+        }).then(res => res.json()).then(data => {
+            if(data.success) {
+                window.location.reload();
+            }
+        });
+    }
+
+    window.saveCredentials = function() {
+        const btn = document.getElementById('saveCredsBtn');
+        const msg = document.getElementById('saveCredsMsg');
+        
+        const formData = new FormData(document.getElementById('deployForm'));
+        
+        btn.disabled = true;
+        btn.textContent = 'Saving...';
+        
+        fetch('/api/save_credentials', {
+            method: 'POST',
+            body: formData
+        }).then(res => res.json()).then(data => {
+            btn.disabled = false;
+            btn.textContent = 'Save Profile Defaults';
+            
+            if(data.success) {
+                msg.textContent = '✓ Saved securely';
+                msg.style.opacity = '1';
+                setTimeout(() => { msg.style.opacity = '0'; }, 3000);
+            } else {
+                alert(data.message || 'Error saving credentials');
+            }
+        }).catch(err => {
+            btn.disabled = false;
+            btn.textContent = 'Save Profile Defaults';
+            alert("Network Error");
+        });
+    }
 });
