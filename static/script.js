@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 result = JSON.parse(xhr.responseText);
             } catch(e) {
-                result = { success: false, message: "Invalid JSON response from server." };
+                result = { success: false, message: "Server Crash/HTML Returned\n\n" + xhr.responseText.substring(0, 500) };
             }
 
             if (xhr.status === 200 && result.success) {

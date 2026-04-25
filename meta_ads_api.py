@@ -44,17 +44,11 @@ class MetaAdsManager:
             video[AdVideo.Field.filepath] = file_path
             video.remote_create()
             
-            logger.info("Extracting thumbnail for video using OpenCV...")
-            import cv2
-            cap = cv2.VideoCapture(file_path)
-            ret, frame = cap.read()
-            cap.release()
-            
+            logger.info("Generating blank thumbnail for video using PIL (Hostinger Safe)...")
+            from PIL import Image
             thumb_path = f"{file_path}_thumb.jpg"
-            if ret:
-                cv2.imwrite(thumb_path, frame)
-            else:
-                logger.error("Failed to extract thumbnail from video.")
+            img = Image.new('RGB', (1080, 1080), color='black')
+            img.save(thumb_path, 'JPEG')
             
             image_hash = self.upload_image(thumb_path)
             return {'type': 'video', 'video_id': video.get_id(), 'image_hash': image_hash}
