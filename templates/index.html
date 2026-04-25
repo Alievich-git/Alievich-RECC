@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Ads Auto-Deployer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Meta Ads <span>Auto-Deployer</span></h1>
+            <p>Programmatically generate multiple isolated adsets identically from a single campaign in one click.</p>
+        </header>
+
+        <form id="deployForm" enctype="multipart/form-data">
+            
+            <section class="glass-panel">
+                <h2>1. Connection Credentials <span class="tooltip" title="Find these in your Meta Developer Portal and Meta Business Settings. The Token should be a System User Access Token.">?</span></h2>
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label>Meta App ID</label>
+                        <input type="text" id="app_id" name="app_id" required placeholder="e.g. 1029384756">
+                    </div>
+                    <div class="input-group">
+                        <label>Meta App Secret</label>
+                        <input type="password" id="app_secret" name="app_secret" required placeholder="••••••••••••••••">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>System User Access Token</label>
+                    <input type="password" id="access_token" name="access_token" required placeholder="EAABw...">
+                </div>
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label>Ad Account ID (without act_)</label>
+                        <input type="text" id="ad_account_id" name="ad_account_id" required placeholder="1160253345514470">
+                    </div>
+                    <div class="input-group">
+                        <label>Facebook Page ID</label>
+                        <input type="text" id="page_id" name="page_id" required placeholder="911989011989264">
+                    </div>
+                </div>
+            </section>
+
+            <section class="glass-panel">
+                <h2>2. Campaign Assets</h2>
+                <div class="input-group">
+                    <label>Primary Text (Ad Message)</label>
+                    <textarea id="primary_text" name="primary_text" rows="4" placeholder="Enter the text that appears above your ad media..." required></textarea>
+                </div>
+                
+                <div class="input-group">
+                    <label>Daily Budget per creative (e.g., 350)</label>
+                    <input type="number" id="daily_budget" name="daily_budget" placeholder="350" min="1" step="0.01" required>
+                </div>
+
+                <div class="upload-zone" id="drop-zone">
+                    <div class="upload-icon">📂</div>
+                    <p>Drag & Drop your Images / Videos here</p>
+                    <p class="sub-text">PNG, JPG, MP4 supported. Each file generates an isolated AdSet.</p>
+                    <input type="file" id="files" name="files[]" multiple accept="image/*,video/mp4" style="display: none;" required>
+                    <button type="button" class="secondary-btn" onclick="document.getElementById('files').click()">Browse Files</button>
+                    <div class="file-list" id="fileList"></div>
+                </div>
+            </section>
+
+            <button type="submit" class="primary-btn" id="submitBtn">
+                <span class="btn-text">Launch Campaign</span>
+                <span class="loader hidden" id="btnLoader"></span>
+            </button>
+        </form>
+
+        <div id="resultModal" class="modal hidden">
+            <div class="glass-panel modal-content">
+                <h2 id="modalTitle">Success!</h2>
+                <p id="modalMessage"></p>
+                <div class="code-block" id="modalData"></div>
+                <button class="primary-btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
