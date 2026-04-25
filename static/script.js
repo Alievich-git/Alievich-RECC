@@ -256,13 +256,13 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
         fetch('/api/create_profile', {
             method: 'POST',
             body: formData
-        }).then(res => res.json()).then(data => {
+        }).then(async res => { const text = await res.text(); try { return JSON.parse(text); } catch(e) { throw new Error('Bad JSON: ' + text.substring(0,100)); } }).then(data => {
             if(data.success) {
                 window.location.reload();
             } else {
                 alert(data.message || 'Error creating profile');
             }
-        }).catch(err => alert("Network Error"));
+        }).catch(err => { console.error(err); alert("Network Error: " + err); });
     }
 
     window.switchProfile = function(id) {
@@ -272,7 +272,7 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
         fetch('/api/switch_profile', {
             method: 'POST',
             body: formData
-        }).then(res => res.json()).then(data => {
+        }).then(async res => { const text = await res.text(); try { return JSON.parse(text); } catch(e) { throw new Error('Bad JSON: ' + text.substring(0,100)); } }).then(data => {
             if(data.success) {
                 window.location.reload();
             }
@@ -291,7 +291,7 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
         fetch('/api/save_credentials', {
             method: 'POST',
             body: formData
-        }).then(res => res.json()).then(data => {
+        }).then(async res => { const text = await res.text(); try { return JSON.parse(text); } catch(e) { throw new Error('Bad JSON: ' + text.substring(0,100)); } }).then(data => {
             btn.disabled = false;
             btn.textContent = 'Save Profile Defaults';
             
