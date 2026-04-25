@@ -32,6 +32,33 @@ class MetaAdsManager:
         image.remote_create()
         logger.info(f"Image uploaded with Hash: {image[AdImage.Field.hash]}")
         return image[AdImage.Field.hash]
+
+    def upload_media(self, file_path):
+        ext = file_path.split('.')[-1].lower()
+        if ext in ['mp4', 'mov', 'avi']:
+            logger.info(f"Uploading video: {file_path}")
+            from facebook_business.adobjects.advideo import AdVideo
+            video = AdVideo(parent_id=self.ad_account_id)
+            video[AdVideo.Field.filepath] = file_path
+            video.remote_create()
+            
+            logger.info("Extracting thumbnail for video using OpenCV...")
+            import cv2
+            cap = cv2.VideoCapture(file_path)
+            ret, frame = cap.read()
+            cap.release()
+            
+            thumb_path = f"{file_path}_thumb.jpg"
+            if ret:
+                cv2.imwrite(thumb_path, frame)
+            else:
+                logger.error("Failed to extract thumbnail from video.")
+            
+            image_hash = self.upload_image(thumb_path)
+            return {'type': 'video', 'video_id': video.get_id(), 'image_hash': image_hash}
+        else:
+            image_hash = self.upload_image(file_path)
+            return {'type': 'image', 'image_hash': image_hash}
         
     def create_campaign(self, config):
         logger.info("Creating Campaign...")
@@ -129,26 +156,42 @@ class MetaAdsManager:
             logger.error(f"Failed to create lead form: {e}")
             raise
 
-    def create_adcreative(self, form_id, image_hash, config):
+    def create_adcreative(self, form_id, media_details, config):
         logger.info("Creating AdCreative...")
         creative = AdCreative(parent_id=self.ad_account_id)
-        creative.update({
-            AdCreative.Field.name: config.get('creative_name', 'Lead Ad Creative'),
-            AdCreative.Field.object_story_spec: {
-                'page_id': self.page_id,
-                'link_data': {
-                    'image_hash': image_hash,
-                    'link': config.get('website_url', 'https://example.com'),
-                    'message': config.get('ad_message', 'Grow your business.'),
-                    'name': config.get('ad_headline', 'Exclusive Access'),
-                    'call_to_action': {
-                        'type': 'SIGN_UP',
-                        'value': {
-                            'lead_gen_form_id': form_id
-                        }
+        
+        object_story_spec = {'page_id': self.page_id}
+        
+        if media_details['type'] == 'image':
+            object_story_spec['link_data'] = {
+                'image_hash': media_details['image_hash'],
+                'link': config.get('website_url', 'https://example.com'),
+                'message': config.get('ad_message', 'Grow your business.'),
+                'name': config.get('ad_headline', 'Exclusive Access'),
+                'call_to_action': {
+                    'type': 'SIGN_UP',
+                    'value': {'lead_gen_form_id': form_id}
+                }
+            }
+        else: # video
+            object_story_spec['video_data'] = {
+                'video_id': media_details['video_id'],
+                'image_hash': media_details['image_hash'],
+                'message': config.get('ad_message', 'Grow your business.'),
+                'title': config.get('ad_headline', 'Exclusive Access'),
+                'call_to_action': {
+                    'type': 'SIGN_UP',
+                    'value': {
+                        'lead_gen_form_id': form_id,
+                        'link': config.get('website_url', 'https://example.com')
                     }
                 }
             }
+
+        ad_creative_name = f"{config.get('creative_name', 'Lead Ad Creative')} - {media_details.get('video_id', media_details.get('image_hash'))}"
+        creative.update({
+            AdCreative.Field.name: ad_creative_name,
+            AdCreative.Field.object_story_spec: object_story_spec
         })
         creative.remote_create()
         logger.info(f"AdCreative created: {creative.get_id()}")

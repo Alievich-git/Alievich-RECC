@@ -42,6 +42,9 @@
   "creative_name": "Real Estate Ad Creative",
   "ad_message": "Invest in the most luxurious and modern housing options. Sign up to get all details.",
   "ad_headline": "🟢 لمزيد من التفاصيل اضغط على Sign Up 🟢",
-  "ad_name": "Single Image Real Estate Ad",
-  "ad_image_path": "ad_image.png"
+  "ad_name": "Dynamic Media Ad",
+  "media_files": [
+    "creative1.png",
+    "creative_vid.mp4"
+  ]
 }

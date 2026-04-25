@@ -34,31 +34,49 @@ def main():
     
     # 4. Execute the sequence
     try:
-        # Step A: Image Upload
-        image_hash = manager.upload_image(config.get('ad_image_path', 'ad_image.png'))
-        
         # Step B: Campaign
         campaign_id = manager.create_campaign(config)
         
         try:
-            # Step C: AdSet
-            adset_id = manager.create_adset(campaign_id, config)
-            
-            # Step D: Lead Form
+            # Step D: Lead Form (Outside loop to share the exact same form)
             form_id = manager.get_or_create_lead_form(config)
             
-            # Step E: AdCreative
-            creative_id = manager.create_adcreative(form_id, image_hash, config)
+            media_files = config.get('media_files', [])
+            if not media_files:
+                logger.error("No media_files found in config.json")
+                return
             
-            # Step F: Ad
-            ad_id = manager.create_ad(adset_id, creative_id, config)
+            adset_ids = []
+            ad_ids = []
+
+            for index, file_path in enumerate(media_files):
+                logger.info(f"--- Processing Creative {index + 1}/{len(media_files)}: {file_path} ---")
+                
+                # Upload matching media type using the unified processor
+                media_details = manager.upload_media(file_path)
+                
+                # Clone adset structure logically isolating the creative
+                current_config = config.copy()
+                current_config['adset_name'] = f"{config.get('adset_name', 'Lead Gen AdSet')} - {file_path}"
+                current_config['creative_name'] = f"{config.get('creative_name', 'Lead Ad Creative')} - {file_path}"
+                current_config['ad_name'] = f"{config.get('ad_name', 'My Lead Ad')} - {file_path}"
+
+                # Step C: AdSet
+                adset_id = manager.create_adset(campaign_id, current_config)
+                adset_ids.append(adset_id)
+                
+                # Step E: AdCreative
+                creative_id = manager.create_adcreative(form_id, media_details, current_config)
+                
+                # Step F: Ad
+                ad_id = manager.create_ad(adset_id, creative_id, current_config)
+                ad_ids.append(ad_id)
             
             logger.info("\n========== SUCCESS ==========")
             logger.info("Your Campaign is officially built and PAUSED in Ads Manager.")
             logger.info(f"Campaign ID: {campaign_id}")
-            logger.info(f"AdSet ID: {adset_id}")
             logger.info(f"Lead Form ID: {form_id}")
-            logger.info(f"Ad ID: {ad_id}")
+            logger.info(f"Generated {len(adset_ids)} AdSets and Ads.")
             logger.info("=============================")
             
         except Exception as e:
