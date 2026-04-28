@@ -65,7 +65,7 @@ def get_db():
 # --- Authentication Wall ---
 @app.before_request
 def require_login():
-    allowed_routes = ['login', 'register', 'static']
+    allowed_routes = ['login', 'register', 'forgot_password', 'reset_password', 'static']
     if request.endpoint not in allowed_routes and 'user_id' not in session:
         return redirect(url_for('login'))
 
