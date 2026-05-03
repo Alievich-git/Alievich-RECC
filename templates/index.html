@@ -51,19 +51,19 @@
                 <button onclick="createProfile()" style="background: rgba(35, 213, 213, 0.15); color: var(--primary); border: 1px solid rgba(35, 213, 213, 0.5); border-radius: 8px; padding: 0 14px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(35, 213, 213, 0.3)';" onmouseout="this.style.background='rgba(35, 213, 213, 0.15)';">+</button>
             </div>
 
-            {% if is_admin_user %}
-            <a href="/admin/invites" style="margin-top: 15px; display: flex; justify-content: center; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(35, 213, 213, 0.3); padding: 12px; border-radius: 10px; background: rgba(35, 213, 213, 0.05); transition: all 0.2s;" onmouseover="this.style.background='rgba(35, 213, 213, 0.15)'; this.style.borderColor='var(--primary)';" onmouseout="this.style.background='rgba(35, 213, 213, 0.05)'; this.style.borderColor='rgba(35, 213, 213, 0.3)';">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                Admin Gateway
-            </a>
-            {% endif %}
-
-            <a href="/logout" style="margin-top: {% if is_admin_user %}8px{% else %}15px{% endif %}; display: flex; justify-content: center; align-items: center; gap: 8px; color: rgba(255, 85, 85, 0.9); text-decoration: none; font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(255, 85, 85, 0.2); padding: 12px; border-radius: 10px; background: rgba(255,85,85,0.05); transition: all 0.2s;" onmouseover="this.style.background='rgba(255,85,85,0.15)'; this.style.borderColor='rgba(255,85,85,0.4)';" onmouseout="this.style.background='rgba(255,85,85,0.05)'; this.style.borderColor='rgba(255,85,85,0.2)';">
+            <a href="/logout" style="margin-top: 15px; display: flex; justify-content: center; align-items: center; gap: 8px; color: rgba(255, 85, 85, 0.9); text-decoration: none; font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(255, 85, 85, 0.2); padding: 12px; border-radius: 10px; background: rgba(255,85,85,0.05); transition: all 0.2s;" onmouseover="this.style.background='rgba(255,85,85,0.15)'; this.style.borderColor='rgba(255,85,85,0.4)';" onmouseout="this.style.background='rgba(255,85,85,0.05)'; this.style.borderColor='rgba(255,85,85,0.2)';">
                 Logout
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
             </a>
         </div>
     </div>
+    
+    {% if is_admin_user %}
+    <!-- Admin Gateway Bubble -->
+    <a href="/admin/invites" title="Admin Gateway" style="position: fixed; top: 90px; right: 25px; z-index: 1000; width: 48px; height: 48px; border-radius: 50%; background: rgba(35, 213, 213, 0.1); backdrop-filter: blur(15px); border: 1px solid rgba(35, 213, 213, 0.4); display: flex; align-items: center; justify-content: center; color: var(--primary); transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" onmouseover="this.style.boxShadow='0 0 20px rgba(35, 213, 213, 0.5)'; this.style.background='rgba(35, 213, 213, 0.2)';" onmouseout="this.style.boxShadow='0 4px 15px rgba(0,0,0,0.3)'; this.style.background='rgba(35, 213, 213, 0.1)';">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+    </a>
+    {% endif %}
 
     <div class="container">
         <header class="hero-header fade-up">

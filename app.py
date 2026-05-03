@@ -212,7 +212,7 @@ import os
 def is_admin(email):
     # Retrieve from .env or default to the owner's email
     admin_email = os.environ.get('ADMIN_EMAIL', 'aliali.elsheikh1@gmail.com')
-    return email.lower() == admin_email.lower()
+    return email.strip().lower() == admin_email.strip().lower()
 
 @app.route('/admin/invites', methods=['GET', 'POST'])
 def admin_invites():
