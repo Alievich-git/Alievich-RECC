@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECC | Admin Invites</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@800;900&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        body { margin: 0; padding: 40px; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .code-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .code-card { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; }
+        .code-val { font-family: monospace; font-size: 1.2rem; color: var(--primary); margin: 10px 0; padding: 10px; background: rgba(35, 213, 213, 0.1); border-radius: 8px; text-align: center; }
+        .status-used { color: #ff5555; font-size: 0.9rem; }
+        .status-active { color: #23d5d5; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="ambient-glow"></div>
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 10;">
+        <div class="admin-header">
+            <div>
+                <h1 style="margin:0; font-size: 2.5rem; font-family: 'Outfit', sans-serif;">Invite Control</h1>
+                <p style="color: var(--text-muted); margin: 5px 0 0 0;">Manage exclusive access to RECC</p>
+            </div>
+            <div style="display: flex; gap: 15px;">
+                <a href="/" class="secondary-btn" style="text-decoration:none; padding: 12px 24px;">Back to App</a>
+                <form method="POST" style="margin: 0;">
+                    <button type="submit" class="primary-btn" style="padding: 12px 24px; margin: 0;">+ Generate New Code</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="code-grid">
+            {% for code in codes %}
+            <div class="code-card">
+                <div style="display:flex; justify-content: space-between;">
+                    <span style="color: var(--text-muted); font-size: 0.9rem;">ID: {{ code['id'] }}</span>
+                    {% if code['is_used'] %}
+                        <span class="status-used">● Used</span>
+                    {% else %}
+                        <span class="status-active">● Active</span>
+                    {% endif %}
+                </div>
+                <div class="code-val">{{ code['code'] }}</div>
+                {% if code['is_used'] %}
+                    <div style="color: var(--text-muted); font-size: 0.9rem; text-align: center; margin-top: 10px;">
+                        Claimed by:<br><strong style="color: #fff;">{{ code['used_by_email'] }}</strong>
+                    </div>
+                {% endif %}
+            </div>
+            {% else %}
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">
+                No invite codes generated yet. Click the button above to create one.
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

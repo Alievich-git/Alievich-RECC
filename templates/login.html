@@ -92,6 +92,9 @@
 
             <form id="registerForm" class="auth-form" action="/register" method="POST">
                 <div class="input-group">
+                    <input type="text" name="invite_code" placeholder="Exclusive Invite Code" required style="border-color: var(--primary); background: rgba(35, 213, 213, 0.05); color: var(--primary);">
+                </div>
+                <div class="input-group">
                     <input type="email" name="email" placeholder="Email Address" required autocomplete="email">
                 </div>
                 <div class="input-group">
