@@ -308,4 +308,58 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
             alert("Network Error");
         });
     }
+
+    window.confirmDeleteProfile = function(id, name) {
+        document.getElementById('deleteProfileId').value = id;
+        document.getElementById('deleteProfileName').textContent = name;
+        
+        const deleteModal = document.getElementById('deleteProfileModal');
+        deleteModal.classList.remove('hidden');
+        deleteModal.style.display = 'flex';
+        setTimeout(() => {
+            deleteModal.classList.add('visible');
+        }, 10);
+    }
+    
+    window.closeDeleteModal = function() {
+        const deleteModal = document.getElementById('deleteProfileModal');
+        deleteModal.classList.remove('visible');
+        setTimeout(() => {
+            deleteModal.classList.add('hidden');
+            deleteModal.style.display = 'none';
+        }, 300);
+    }
+    
+    window.executeProfileDeletion = function() {
+        const id = document.getElementById('deleteProfileId').value;
+        const btn = document.getElementById('confirmDeleteBtn');
+        
+        btn.disabled = true;
+        btn.textContent = 'Deleting...';
+        
+        const formData = new URLSearchParams();
+        formData.append('profile_id', id);
+        
+        fetch('/api/delete_profile', {
+            method: 'POST',
+            body: formData
+        }).then(async res => {
+            const text = await res.text();
+            try { return JSON.parse(text); } catch(e) { throw new Error('Bad JSON'); }
+        }).then(data => {
+            if(data.success) {
+                window.location.reload();
+            } else {
+                alert(data.message || 'Error deleting profile');
+                btn.disabled = false;
+                btn.textContent = 'Yes, Delete';
+                closeDeleteModal();
+            }
+        }).catch(err => {
+            alert("Network Error");
+            btn.disabled = false;
+            btn.textContent = 'Yes, Delete';
+            closeDeleteModal();
+        });
+    }
 });

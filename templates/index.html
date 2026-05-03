@@ -40,9 +40,14 @@
             
             <div id="profilesList" style="max-height: 220px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px;">
                 {% for profile in profiles %}
-                <button onclick="switchProfile({{ profile.id }})" style="text-align: left; background: {% if profile.id == active_profile_id %}rgba(35, 213, 213, 0.15){% else %}transparent{% endif %}; color: {% if profile.id == active_profile_id %}var(--primary){% else %}var(--text-muted){% endif %}; border: 1px solid {% if profile.id == active_profile_id %}rgba(35, 213, 213, 0.3){% else %}transparent{% endif %}; border-radius: 8px; padding: 12px 14px; cursor: pointer; font-size: 0.95rem; font-weight: 500; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center;" onmouseover="this.style.background='rgba(255,255,255,0.05)';" onmouseout="this.style.background='{% if profile.id == active_profile_id %}rgba(35, 213, 213, 0.15){% else %}transparent{% endif %}';">
-                    {{ profile.name }} {% if profile.id == active_profile_id %}<span class="pulse" style="width: 8px; height: 8px; background: var(--primary); border-radius: 50%; display: inline-block;"></span>{% endif %}
-                </button>
+                <div style="display: flex; gap: 5px; align-items: stretch;">
+                    <button onclick="switchProfile({{ profile.id }})" style="flex: 1; text-align: left; background: {% if profile.id == active_profile_id %}rgba(35, 213, 213, 0.15){% else %}transparent{% endif %}; color: {% if profile.id == active_profile_id %}var(--primary){% else %}var(--text-muted){% endif %}; border: 1px solid {% if profile.id == active_profile_id %}rgba(35, 213, 213, 0.3){% else %}transparent{% endif %}; border-radius: 8px; padding: 12px 14px; cursor: pointer; font-size: 0.95rem; font-weight: 500; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center;" onmouseover="this.style.background='rgba(255,255,255,0.05)';" onmouseout="this.style.background='{% if profile.id == active_profile_id %}rgba(35, 213, 213, 0.15){% else %}transparent{% endif %}';">
+                        {{ profile.name }} {% if profile.id == active_profile_id %}<span class="pulse" style="width: 8px; height: 8px; background: var(--primary); border-radius: 50%; display: inline-block;"></span>{% endif %}
+                    </button>
+                    <button onclick="confirmDeleteProfile({{ profile.id }}, '{{ profile.name|e }}')" style="background: rgba(255, 85, 85, 0.05); border: 1px solid rgba(255, 85, 85, 0.1); padding: 0 14px; cursor: pointer; color: rgba(255, 85, 85, 0.8); transition: all 0.3s; border-radius: 8px; display: flex; align-items: center; justify-content: center;" onmouseover="this.style.background='rgba(255,85,85,0.2)'; this.style.color='rgba(255, 85, 85, 1)'; this.style.borderColor='rgba(255, 85, 85, 0.4)'; this.style.boxShadow='0 0 12px rgba(255, 85, 85, 0.4)';" onmouseout="this.style.background='rgba(255,85,85,0.05)'; this.style.color='rgba(255, 85, 85, 0.8)'; this.style.borderColor='rgba(255, 85, 85, 0.1)'; this.style.boxShadow='none';" title="Delete Profile">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                    </button>
+                </div>
                 {% endfor %}
             </div>
 
@@ -210,6 +215,25 @@
                 <p id="modalMessage"></p>
                 <div class="code-block" id="modalData"></div>
                 <button class="primary-btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+
+        <div id="deleteProfileModal" class="modal hidden">
+            <div class="glass-panel modal-content" style="border-color: rgba(255, 85, 85, 0.3); box-shadow: 0 15px 40px rgba(255, 85, 85, 0.15);">
+                <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+                    <div style="background: rgba(255, 85, 85, 0.1); padding: 15px; border-radius: 50%; border: 1px solid rgba(255, 85, 85, 0.3);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255, 85, 85, 0.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                    </div>
+                </div>
+                <h2 style="color: rgba(255, 85, 85, 0.9);">Delete Profile?</h2>
+                <p>Are you sure you want to permanently delete <strong id="deleteProfileName" style="color: #fff;"></strong>? This action cannot be undone and all saved credentials will be lost.</p>
+                
+                <input type="hidden" id="deleteProfileId">
+                
+                <div style="display: flex; gap: 15px; margin-top: 30px;">
+                    <button class="secondary-btn" style="flex: 1;" onclick="closeDeleteModal()">Cancel</button>
+                    <button class="primary-btn" style="flex: 1; background: rgba(255, 85, 85, 0.15); border-color: rgba(255, 85, 85, 0.5); color: #fff;" onmouseover="this.style.background='rgba(255, 85, 85, 0.3)';" onmouseout="this.style.background='rgba(255, 85, 85, 0.15)';" onclick="executeProfileDeletion()" id="confirmDeleteBtn">Yes, Delete</button>
+                </div>
             </div>
         </div>
         

@@ -271,6 +271,27 @@ def index():
         
     return render_template('index.html', creds=creds or {}, profiles=profiles, active_profile_id=active_id, is_admin_user=is_admin_user)
 
+@app.route('/api/delete_profile', methods=['POST'])
+def delete_profile():
+    profile_id = request.form.get('profile_id')
+    if not profile_id:
+        return jsonify({'success': False, 'message': 'Profile ID is required'})
+    
+    db = get_db()
+    profile = db.execute('SELECT id FROM profiles WHERE id = ? AND user_id = ?', (profile_id, session['user_id'])).fetchone()
+    if not profile:
+        db.close()
+        return jsonify({'success': False, 'message': 'Profile not found or unauthorized'})
+        
+    db.execute('DELETE FROM profiles WHERE id = ? AND user_id = ?', (profile_id, session['user_id']))
+    db.commit()
+    db.close()
+    
+    if session.get('active_profile_id') == int(profile_id):
+        session.pop('active_profile_id', None)
+        
+    return jsonify({'success': True})
+
 @app.route('/api/create_profile', methods=['POST'])
 def create_profile():
     name = request.form.get('name', '').strip()
