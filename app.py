@@ -252,6 +252,7 @@ def logout():
 def index():
     db = get_db()
     profiles = db.execute('SELECT id, name FROM profiles WHERE user_id = ?', (session['user_id'],)).fetchall()
+    user = db.execute('SELECT email FROM users WHERE id = ?', (session['user_id'],)).fetchone()
     
     active_id = session.get('active_profile_id')
     if not active_id and profiles:
@@ -263,7 +264,12 @@ def index():
         creds = db.execute('SELECT * FROM profiles WHERE id = ? AND user_id = ?', (active_id, session['user_id'])).fetchone()
         
     db.close()
-    return render_template('index.html', creds=creds or {}, profiles=profiles, active_profile_id=active_id)
+    
+    is_admin_user = False
+    if user:
+        is_admin_user = is_admin(user['email'])
+        
+    return render_template('index.html', creds=creds or {}, profiles=profiles, active_profile_id=active_id, is_admin_user=is_admin_user)
 
 @app.route('/api/create_profile', methods=['POST'])
 def create_profile():
