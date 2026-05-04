@@ -28,6 +28,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
     
+    <!-- Particles Engine -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
     <!-- Base Styles (If any global resets exist) -->
     <link rel="stylesheet" href="/static/styles.css">
 
@@ -86,7 +89,7 @@
         /* ------------------------------------------------------------------
            BACKGROUND EFFECTS 
            ------------------------------------------------------------------ */
-        #neural-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -2; pointer-events: none; opacity: 0.7; }
+        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -2; pointer-events: none; opacity: 0.7; }
         
         .aurora-orb {
             position: fixed;
@@ -283,8 +286,8 @@
 </head>
 <body>
 
-    <!-- Neural Network Canvas -->
-    <canvas id="neural-canvas"></canvas>
+    <!-- Particles Background Engine -->
+    <div id="particles-js"></div>
     <div class="aurora-orb orb-1"></div>
     <div class="aurora-orb orb-2"></div>
 
@@ -583,92 +586,28 @@
             });
         }
 
-        /* Custom Neural Network Visualization Animation */
-        const canvas = document.getElementById('neural-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let particles = [];
-        
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        class Node {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.4;
-                this.vy = (Math.random() - 0.5) * 0.4;
-                this.radius = Math.random() * 1.5 + 0.5;
+        /* Initialize Particles.js */
+        window.addEventListener('DOMContentLoaded', () => {
+            if(window.particlesJS) {
+                particlesJS("particles-js", {
+                    "particles": {
+                        "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                        "color": { "value": "#23d5d5" },
+                        "shape": { "type": "circle" },
+                        "opacity": { "value": 0.3, "random": false },
+                        "size": { "value": 2, "random": true },
+                        "line_linked": { "enable": true, "distance": 150, "color": "#23d5d5", "opacity": 0.2, "width": 1 },
+                        "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                        "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 4 } }
+                    },
+                    "retina_detect": true
+                });
             }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches;
-                ctx.fillStyle = isLightMode ? `rgba(2, 132, 199, 0.6)` : `rgba(35, 213, 213, 0.5)`;
-                ctx.fill();
-            }
-        }
-
-        // Adjust particle density based on screen size
-        const nodeCount = window.innerWidth < 768 ? 40 : 80;
-        for (let i = 0; i < nodeCount; i++) particles.push(new Node());
-
-        let mouse = { x: null, y: null };
-        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
-        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            
-            const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches;
-            const lineColor = isLightMode ? '2, 132, 199' : '35, 213, 213'; 
-
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 120) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(${lineColor}, ${0.8 - distance / 150})`;
-                        ctx.lineWidth = 0.6;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-
-                if (mouse.x != null && mouse.y != null) {
-                    const dx = particles[i].x - mouse.x;
-                    const dy = particles[i].y - mouse.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < 150) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(${lineColor}, ${1 - distance / 150})`;
-                        ctx.lineWidth = 1;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(mouse.x, mouse.y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animate);
-        }
-        animate();
+        });
     </script>
 </body>
 </html>
