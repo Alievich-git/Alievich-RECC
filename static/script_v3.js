@@ -242,8 +242,9 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
             if (!profileContainer.contains(e.target)) {
                 profileDropdown.style.display = 'none';
             }
-            if (!e.target.closest('.profile-action-menu') && !e.target.closest('button[title="Options"]')) {
-                document.querySelectorAll('.profile-action-menu').forEach(m => m.style.display = 'none');
+            if (!e.target.closest('#globalProfileMenu') && !e.target.closest('button[title="Options"]')) {
+                const globalMenu = document.getElementById('globalProfileMenu');
+                if(globalMenu) globalMenu.style.display = 'none';
             }
         });
     }
@@ -447,5 +448,38 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
         }).catch(err => {
             alert("Network Error");
         });
+    }
+
+    window.openGlobalMenu = function(e, id, name) {
+        e.stopPropagation();
+        const btnRect = e.currentTarget.getBoundingClientRect();
+        const menu = document.getElementById('globalProfileMenu');
+        
+        // Hide if already open on same button
+        if(menu.style.display === 'flex' && menu.dataset.profileId == id) {
+            menu.style.display = 'none';
+            return;
+        }
+
+        menu.dataset.profileId = id;
+        menu.style.display = 'flex';
+        
+        // Positioning logic
+        menu.style.top = (btnRect.bottom + 5) + 'px';
+        menu.style.left = (btnRect.right - 130) + 'px'; // 130px is roughly the width of the menu
+        
+        // Update handlers
+        document.getElementById('globalMenuRename').onclick = function() {
+            menu.style.display = 'none';
+            openRenameModal(id, name);
+        };
+        document.getElementById('globalMenuDuplicate').onclick = function() {
+            menu.style.display = 'none';
+            executeProfileDuplication(id);
+        };
+        document.getElementById('globalMenuDelete').onclick = function() {
+            menu.style.display = 'none';
+            confirmDeleteProfile(id, name);
+        };
     }
 });
