@@ -362,4 +362,64 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
             closeDeleteModal();
         });
     }
+
+    window.openRenameModal = function(id, currentName) {
+        document.getElementById('renameProfileId').value = id;
+        document.getElementById('renameProfileName').value = currentName;
+        
+        const renameModal = document.getElementById('renameProfileModal');
+        renameModal.classList.remove('hidden');
+        renameModal.style.display = 'flex';
+        setTimeout(() => {
+            renameModal.classList.add('visible');
+            document.getElementById('renameProfileName').focus();
+        }, 10);
+    }
+    
+    window.closeRenameModal = function() {
+        const renameModal = document.getElementById('renameProfileModal');
+        renameModal.classList.remove('visible');
+        setTimeout(() => {
+            renameModal.classList.add('hidden');
+            renameModal.style.display = 'none';
+        }, 300);
+    }
+    
+    window.executeProfileRename = function() {
+        const id = document.getElementById('renameProfileId').value;
+        const newName = document.getElementById('renameProfileName').value.trim();
+        const btn = document.getElementById('confirmRenameBtn');
+        
+        if (!newName) {
+            alert('Please enter a valid profile name.');
+            return;
+        }
+        
+        btn.disabled = true;
+        btn.textContent = 'Saving...';
+        
+        const formData = new URLSearchParams();
+        formData.append('profile_id', id);
+        formData.append('new_name', newName);
+        
+        fetch('/api/rename_profile', {
+            method: 'POST',
+            body: formData
+        }).then(async res => {
+            const text = await res.text();
+            try { return JSON.parse(text); } catch(e) { throw new Error('Bad JSON'); }
+        }).then(data => {
+            if(data.success) {
+                window.location.reload();
+            } else {
+                alert(data.message || 'Error renaming profile');
+                btn.disabled = false;
+                btn.textContent = 'Save Changes';
+            }
+        }).catch(err => {
+            alert("Network Error");
+            btn.disabled = false;
+            btn.textContent = 'Save Changes';
+        });
+    }
 });

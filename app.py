@@ -292,6 +292,26 @@ def delete_profile():
         
     return jsonify({'success': True})
 
+@app.route('/api/rename_profile', methods=['POST'])
+def rename_profile():
+    profile_id = request.form.get('profile_id')
+    new_name = request.form.get('new_name', '').strip()
+    
+    if not profile_id or not new_name:
+        return jsonify({'success': False, 'message': 'Profile ID and new name are required'})
+        
+    db = get_db()
+    profile = db.execute('SELECT id FROM profiles WHERE id = ? AND user_id = ?', (profile_id, session['user_id'])).fetchone()
+    if not profile:
+        db.close()
+        return jsonify({'success': False, 'message': 'Profile not found or unauthorized'})
+        
+    db.execute('UPDATE profiles SET name = ? WHERE id = ? AND user_id = ?', (new_name, profile_id, session['user_id']))
+    db.commit()
+    db.close()
+    
+    return jsonify({'success': True})
+
 @app.route('/api/create_profile', methods=['POST'])
 def create_profile():
     name = request.form.get('name', '').strip()
