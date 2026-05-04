@@ -3,269 +3,540 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RECC | Automate Your Real Estate Empire</title>
+    <!-- Heavy SEO Title -->
+    <title>RECC | Automated Meta Ads Generator for Real Estate Professionals</title>
     
     <!-- Core SEO & Performance Meta -->
-    <meta name="description" content="Secure Login for the RECC Dashboard. Automate your Meta Real Estate Campaigns instantly.">
+    <meta name="description" content="Scale your real estate lead generation with RECC. The ultimate algorithm-driven Meta Ads campaign generator, duplication engine, and isolated private pipeline.">
+    <meta name="keywords" content="Real Estate Marketing Automation, Meta Ads Generator for Realtors, Real Estate Campaign Creator, Lead Generation Scaling, Automated Adset Creation, Real Estate Agency Software">
     <meta name="author" content="Ali Alievich">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="RECC | Secure Authentication">
-    <meta property="og:description" content="Access the RECC private pipeline to continuously automate your real estate backend flows.">
+    <meta property="og:title" content="RECC | The Infinite Scale Protocol for Real Estate Meta Ads">
+    <meta property="og:description" content="Stop wasting hours inside Ads Manager. RECC allows elite real estate professionals to deploy, duplicate, and scale winning architectures instantly.">
     <meta property="og:type" content="website">
 
-    <!-- Preconnects for maximum network routing speed -->
+    <!-- Preconnects -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-
+    
+    <!-- Brand Favicons -->
     <link rel="icon" type="image/png" href="/static/images/favicon-black.png" media="(prefers-color-scheme: light)">
     <link rel="icon" type="image/png" href="/static/images/favicon.png" media="(prefers-color-scheme: dark)">
     <link rel="shortcut icon" href="/static/images/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@800;900&display=swap" rel="stylesheet">
+    
+    <!-- Premium Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+    
+    <!-- Base Styles (If any global resets exist) -->
     <link rel="stylesheet" href="/static/styles.css">
+
     <style>
+        /* ------------------------------------------------------------------
+           THEME & VARIABLES 
+           ------------------------------------------------------------------ */
         :root {
             /* Default Dark Mode Theme */
-            --bg-color: #0A0F1A;
-            --text-color: #FFFFFF;
-            --text-muted-color: rgba(255, 255, 255, 0.7);
-            --panel-bg: rgba(15, 22, 36, 0.6);
-            --panel-border: rgba(255, 255, 255, 0.1);
-            --feature-bg: rgba(255, 255, 255, 0.02);
-            --feature-hover: rgba(35, 213, 213, 0.05);
-            --input-bg: rgba(255, 255, 255, 0.05);
-            --tab-bg: rgba(0, 0, 0, 0.3);
-            --shadow-color: rgba(0, 0, 0, 0.5);
-            --net-color: 35, 213, 213; /* #23d5d5 */
+            --bg-color: #05080f;
+            --surface-color: rgba(15, 22, 36, 0.4);
+            --surface-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.65);
+            --primary-accent: #23d5d5; /* Cyan */
+            --primary-accent-glow: rgba(35, 213, 213, 0.2);
+            --secondary-accent: #4f83cc; /* Blue */
+            --modal-bg: rgba(10, 15, 25, 0.85);
+            --input-bg: rgba(255, 255, 255, 0.03);
+            --tab-bg: rgba(0, 0, 0, 0.4);
         }
         
         @media (prefers-color-scheme: light) {
             :root {
                 /* Light Mode Theme */
-                --bg-color: #F4F7FB;
-                --text-color: #1A2233;
-                --text-muted-color: rgba(26, 34, 51, 0.7);
-                --panel-bg: rgba(255, 255, 255, 0.8);
-                --panel-border: rgba(35, 213, 213, 0.2);
-                --feature-bg: rgba(255, 255, 255, 0.9);
-                --feature-hover: rgba(35, 213, 213, 0.1);
-                --input-bg: rgba(0, 0, 0, 0.03);
-                --tab-bg: rgba(0, 0, 0, 0.05);
-                --shadow-color: rgba(35, 213, 213, 0.15);
-                --net-color: 35, 213, 213;
+                --bg-color: #f8fafc;
+                --surface-color: rgba(255, 255, 255, 0.7);
+                --surface-border: rgba(35, 213, 213, 0.15);
+                --text-primary: #0f172a;
+                --text-secondary: rgba(15, 23, 42, 0.7);
+                --primary-accent: #0284c7; 
+                --primary-accent-glow: rgba(2, 132, 199, 0.15);
+                --secondary-accent: #23d5d5;
+                --modal-bg: rgba(255, 255, 255, 0.9);
+                --input-bg: rgba(0, 0, 0, 0.02);
+                --tab-bg: rgba(0, 0, 0, 0.04);
             }
         }
 
+        /* ------------------------------------------------------------------
+           RESET & FOUNDATION 
+           ------------------------------------------------------------------ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body { 
-            display: block; 
-            overflow-x: hidden; 
-            margin: 0; 
-            padding: 0; 
-            min-height: 100vh; 
+            font-family: 'General Sans', sans-serif;
             background-color: var(--bg-color); 
-            color: var(--text-color);
-            transition: background-color 0.5s ease, color 0.5s ease;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            transition: background-color 0.4s ease;
         }
+        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; font-weight: 800; line-height: 1.2; }
+        a { text-decoration: none; color: inherit; }
         
-        #neural-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        /* ------------------------------------------------------------------
+           BACKGROUND EFFECTS 
+           ------------------------------------------------------------------ */
+        #neural-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -2; pointer-events: none; opacity: 0.7; }
         
-        /* Layout */
-        .landing-layout { display: flex; min-height: 100vh; position: relative; z-index: 10; }
+        .aurora-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        .orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--primary-accent-glow); animation: float 15s ease-in-out infinite alternate; }
+        .orb-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: rgba(79, 131, 204, 0.15); animation: float 20s ease-in-out infinite alternate-reverse; }
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(5%, 5%) scale(1.1); } }
+
+        /* ------------------------------------------------------------------
+           UTILITIES & COMPONENTS 
+           ------------------------------------------------------------------ */
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        .text-gradient { background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* Hero Section */
-        .landing-hero {
-            flex: 1.2;
-            display: flex;
+        .glass-card {
+            background: var(--surface-color);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--surface-border);
+            border-radius: 24px;
+            padding: 40px;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-card:hover { border-color: rgba(35, 213, 213, 0.4); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+
+        .btn-primary {
+            display: inline-flex;
             align-items: center;
-            padding: 60px;
-            background: linear-gradient(135deg, var(--bg-color) 0%, transparent 100%);
-            backdrop-filter: blur(5px);
-            border-right: 1px solid var(--panel-border);
+            justify-content: center;
+            background: var(--primary-accent);
+            color: #fff !important;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--primary-accent-glow);
         }
-        .hero-content { max-width: 600px; margin: 0 auto; animation: fadeUp 1s ease forwards; }
-        .landing-title { font-size: 3.5rem; line-height: 1.1; font-weight: 800; margin-bottom: 20px; font-family: 'Outfit', sans-serif; color: var(--text-color); letter-spacing: -1px; }
-        .text-gradient { background: linear-gradient(135deg, var(--primary), #4f83cc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .landing-subtitle { font-size: 1.15rem; color: var(--text-muted-color); line-height: 1.6; margin-bottom: 40px; font-family: 'General Sans', sans-serif; }
-        
-        /* Features */
-        .feature-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 20px; }
-        .feature-list li {
-            display: flex; gap: 15px; align-items: flex-start; color: var(--text-muted-color); font-size: 0.95rem; line-height: 1.4;
-            background: var(--feature-bg); padding: 15px; border-radius: 12px; border: 1px solid var(--panel-border); transition: all 0.3s;
-            box-shadow: 0 4px 15px var(--shadow-color);
-        }
-        .feature-list li:hover { background: var(--feature-hover); border-color: rgba(35, 213, 213, 0.4); transform: translateX(5px); box-shadow: 0 8px 25px rgba(35, 213, 213, 0.2); }
-        .feature-list strong { color: var(--text-color); font-size: 1.05rem; display: block; margin-bottom: 4px; }
-        .feature-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(35, 213, 213, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        
-        /* Auth Gateway */
-        .landing-auth { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; position: relative; }
-        .landing-auth .auth-panel { width: 100%; max-width: 440px; animation: fadeUp 1.2s ease forwards; background: var(--panel-bg); border: 1px solid var(--panel-border); box-shadow: 0 15px 35px var(--shadow-color); }
-        .landing-footer { position: absolute; bottom: 20px; text-align: center; color: var(--text-muted-color); font-size: 0.75rem; animation: fadeUp 1.5s ease forwards; opacity: 0.6; }
-        
-        /* Auth Form Internals */
-        .auth-panel h2 { justify-content: center; margin-bottom: 30px; border-bottom: none; font-size: 1.8rem; letter-spacing: 2px; color: var(--text-color); }
-        .tabs { display: flex; margin-bottom: 25px; border-radius: 12px; background: var(--tab-bg); padding: 5px; }
-        .tab-btn { flex: 1; padding: 12px; border-radius: 8px; text-align: center; cursor: pointer; color: var(--text-muted-color); font-weight: 600; transition: all 0.3s ease; }
-        .tab-btn.active { background: rgba(35, 213, 213, 0.15); color: var(--primary); box-shadow: 0 0 10px rgba(35, 213, 213, 0.1); }
-        .auth-form { display: none; }
-        .auth-form.active { display: block; animation: slideDown 0.3s ease forwards; }
-        .error-msg { background: rgba(255,50,50,0.1); border: 1px solid rgba(255,50,50,0.3); color: #ff5555; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: 500; font-size: 0.9rem; text-align: center; }
-        
-        /* Overriding global input styles for light mode */
-        .input-group input { background: var(--input-bg); color: var(--text-color); border: 1px solid var(--panel-border); }
-        .input-group input:focus { border-color: var(--primary); background: rgba(35, 213, 213, 0.05); }
+        .btn-primary:hover { transform: scale(1.02); box-shadow: 0 8px 25px var(--primary-accent-glow); filter: brightness(1.1); }
+        .btn-secondary { background: transparent; border: 1px solid var(--surface-border); color: var(--text-primary); }
+        .btn-secondary:hover { background: var(--input-bg); border-color: var(--primary-accent); }
 
-        /* Custom Checkbox */
-        .custom-checkbox { position: relative; padding-left: 30px; cursor: pointer; user-select: none; color: var(--text-muted-color); display: flex; align-items: center; font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease; }
-        .custom-checkbox input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
-        .checkmark { position: absolute; left: 0; top: 50%; transform: translateY(-50%); height: 18px; width: 18px; background-color: var(--tab-bg); border: 1px solid var(--panel-border); border-radius: 4px; transition: all 0.3s ease; }
-        .custom-checkbox:hover .checkmark { border-color: rgba(35, 213, 213, 0.5); }
-        .custom-checkbox input:checked ~ .checkmark { background-color: rgba(35, 213, 213, 0.2); border-color: var(--primary); box-shadow: 0 0 10px rgba(35, 213, 213, 0.2); }
-        .checkmark:after { content: ""; position: absolute; display: none; }
-        .custom-checkbox input:checked ~ .checkmark:after { display: block; }
-        .custom-checkbox .checkmark:after { left: 5px; top: 1px; width: 5px; height: 10px; border: solid var(--primary); border-width: 0 2px 2px 0; transform: rotate(45deg); }
-        .custom-checkbox input:checked ~ span.label-text { color: var(--primary); }
+        /* Scroll Animations */
+        .obs-fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .obs-fade-up.visible { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; } .delay-3 { transition-delay: 0.3s; }
 
-        /* Responsive Media Queries */
-        @media (max-width: 992px) {
-            .landing-layout { flex-direction: column; }
-            .landing-hero { padding: 40px 20px; border-right: none; border-bottom: 1px solid var(--panel-border); }
-            .landing-title { font-size: 2.8rem; }
-            .landing-auth { padding: 40px 20px; }
-            .landing-footer { position: relative; margin-top: 40px; bottom: 0; }
+        /* ------------------------------------------------------------------
+           NAVBAR 
+           ------------------------------------------------------------------ */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 20px 0;
+            background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 100%);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+            transition: padding 0.3s ease, background 0.3s ease;
         }
-        @media (max-width: 576px) {
-            .landing-title { font-size: 2.2rem; }
+        .navbar.scrolled { padding: 12px 0; background: var(--surface-color); border-bottom: 1px solid var(--surface-border); }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 12px; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.5rem; letter-spacing: 1px; }
+        .brand img { width: 36px; border-radius: 8px; }
+        
+        /* ------------------------------------------------------------------
+           HERO SECTION 
+           ------------------------------------------------------------------ */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; text-align: center; position: relative; padding-top: 80px; }
+        .hero-badge {
+            display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
+            background: var(--primary-accent-glow); color: var(--primary-accent); border: 1px solid rgba(35, 213, 213, 0.2);
+            margin-bottom: 24px; letter-spacing: 1px; text-transform: uppercase;
+        }
+        .hero h1 { font-size: clamp(3rem, 6vw, 5.5rem); letter-spacing: -2px; margin-bottom: 24px; max-width: 1000px; margin-inline: auto; }
+        .hero p { font-size: clamp(1.1rem, 2vw, 1.4rem); color: var(--text-secondary); max-width: 700px; margin: 0 auto 40px auto; }
+        .hero-actions { display: flex; gap: 16px; justify-content: center; }
+
+        /* ------------------------------------------------------------------
+           BENTO GRID (FEATURES)
+           ------------------------------------------------------------------ */
+        .bento-section { padding: 100px 0; position: relative; z-index: 10; background: var(--bg-color); }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 16px; letter-spacing: -1px; }
+        .section-header p { color: var(--text-secondary); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .bento-item { grid-column: span 12; display: flex; flex-direction: column; }
+        @media(min-width: 768px) {
+            .item-large { grid-column: span 8; }
+            .item-small { grid-column: span 4; }
+        }
+        .bento-icon { width: 56px; height: 56px; border-radius: 16px; background: var(--primary-accent-glow); color: var(--primary-accent); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+        .bento-item h3 { font-size: 1.8rem; margin-bottom: 12px; }
+        .bento-item p { color: var(--text-secondary); font-size: 1.05rem; }
+
+        /* ------------------------------------------------------------------
+           WORKFLOW SECTION
+           ------------------------------------------------------------------ */
+        .workflow-section { padding: 100px 0; background: var(--bg-color); border-top: 1px solid var(--surface-border); }
+        .workflow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin-top: 60px; }
+        .step-card { text-align: center; padding: 40px 24px; }
+        .step-number { font-family: 'Outfit'; font-size: 4rem; font-weight: 900; color: var(--surface-border); line-height: 1; margin-bottom: 20px; transition: color 0.3s; }
+        .step-card:hover .step-number { color: var(--primary-accent); }
+        
+        /* ------------------------------------------------------------------
+           SEO CONTEXT SECTION
+           ------------------------------------------------------------------ */
+        .seo-section { padding: 100px 0; background: var(--bg-color); border-top: 1px solid var(--surface-border); }
+        .seo-article { max-width: 800px; margin: 0 auto; color: var(--text-secondary); font-size: 1.1rem; }
+        .seo-article h2, .seo-article h3 { color: var(--text-primary); margin: 40px 0 16px 0; }
+        .seo-article p { margin-bottom: 24px; }
+        
+        /* ------------------------------------------------------------------
+           FOOTER
+           ------------------------------------------------------------------ */
+        footer { padding: 40px 0; border-top: 1px solid var(--surface-border); background: var(--bg-color); text-align: center; color: var(--text-secondary); font-size: 0.9rem; }
+        
+        /* ------------------------------------------------------------------
+           AUTH MODAL (THE GATEWAY)
+           ------------------------------------------------------------------ */
+        .auth-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            z-index: 9999; display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+        }
+        .auth-overlay.active { opacity: 1; pointer-events: all; }
+        
+        .auth-modal {
+            background: var(--modal-bg);
+            border: 1px solid var(--surface-border);
+            border-radius: 24px;
+            width: 100%; max-width: 420px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            transform: scale(0.95) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        .auth-overlay.active .auth-modal { transform: scale(1) translateY(0); }
+        
+        .close-modal { position: absolute; top: 20px; right: 24px; background: none; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer; transition: color 0.2s; }
+        .close-modal:hover { color: var(--text-primary); }
+
+        .auth-modal h2 { text-align: center; margin-bottom: 30px; font-size: 1.8rem; letter-spacing: 1px; }
+        .tabs { display: flex; margin-bottom: 24px; border-radius: 12px; background: var(--tab-bg); padding: 6px; }
+        .tab-btn { flex: 1; padding: 10px; border-radius: 8px; text-align: center; cursor: pointer; color: var(--text-secondary); font-weight: 600; font-size: 0.95rem; transition: all 0.3s; }
+        .tab-btn.active { background: var(--primary-accent-glow); color: var(--text-primary); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        
+        .auth-form { display: none; animation: slideDown 0.3s ease; }
+        .auth-form.active { display: block; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .input-group { margin-bottom: 16px; }
+        .input-group input { 
+            width: 100%; padding: 14px 16px; border-radius: 12px; 
+            background: var(--input-bg); border: 1px solid var(--surface-border);
+            color: var(--text-primary); font-family: 'General Sans', sans-serif; font-size: 1rem;
+            transition: border-color 0.3s, background 0.3s;
+        }
+        .input-group input:focus { outline: none; border-color: var(--primary-accent); background: var(--primary-accent-glow); }
+        .error-msg { background: rgba(255,50,50,0.1); border: 1px solid rgba(255,50,50,0.3); color: #ff5555; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem; text-align: center; }
+        
+        .custom-checkbox { display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--text-secondary); font-size: 0.9rem; user-select: none; }
+        .custom-checkbox input { display: none; }
+        .checkmark { width: 18px; height: 18px; border-radius: 4px; border: 1px solid var(--surface-border); background: var(--input-bg); display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .custom-checkbox input:checked + .checkmark { background: var(--primary-accent); border-color: var(--primary-accent); }
+        .custom-checkbox input:checked + .checkmark::after { content: "✓"; color: #fff; font-size: 12px; font-weight: bold; }
+        
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .glass-card { padding: 30px 20px; }
+            .auth-modal { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Neural Network Canvas -->
     <canvas id="neural-canvas"></canvas>
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
 
-    <div class="landing-layout">
-        
-        <!-- Left Side: Pitch -->
-        <div class="landing-hero">
-            <div class="hero-content">
-                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
-                    <img src="/static/images/alivich-logo.webp" alt="Alievich Brand Logo" style="width: 50px; border-radius: 12px; box-shadow: 0 4px 15px var(--shadow-color);">
-                    <span style="font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 2rem; color: var(--text-color); letter-spacing: 2px;">RECC</span>
-                </div>
-                
-                <h1 class="landing-title">Automate Your <br><span class="text-gradient">Real Estate Empire</span></h1>
-                <p class="landing-subtitle">The ultimate Meta Ads campaign creator designed exclusively for real estate professionals. Generate, duplicate, and launch high-converting campaigns instantly.</p>
-                
-                <ul class="feature-list">
-                    <li>
-                        <div class="feature-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-                        </div>
-                        <div>
-                            <strong>Instant Campaign Generation</strong>
-                            Stop building ads manually. Automatically populate complex campaigns directly to an Excel pipeline.
-                        </div>
-                    </li>
-                    <li>
-                        <div class="feature-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                        </div>
-                        <div>
-                            <strong>One-Click Duplication</strong>
-                            Scale winning profiles seamlessly. Clone all configurations and ad assets across multiple properties.
-                        </div>
-                    </li>
-                    <li>
-                        <div class="feature-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        </div>
-                        <div>
-                            <strong>Secure Private Pipeline</strong>
-                            Your data and credentials remain exclusively yours, locked down within a fully isolated multi-tenant architecture.
-                        </div>
-                    </li>
-                </ul>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-content">
+            <div class="brand">
+                <img src="/static/images/alivich-logo.webp" alt="Alievich">
+                RECC
+            </div>
+            <div>
+                <button class="btn-primary" onclick="openAuthModal('login')" style="padding: 10px 20px; font-size: 0.9rem;">Client Portal</button>
             </div>
         </div>
+    </nav>
 
-        <!-- Right Side: Auth Gateway -->
-        <div class="landing-auth">
-            <div class="glass-panel auth-panel">
-                {% if error %}
-                    <div class="error-msg">{{ error }}</div>
-                {% endif %}
-
-                <div class="tabs">
-                    <div class="tab-btn active" onclick="switchTab('login')">Log In</div>
-                    <div class="tab-btn" onclick="switchTab('register')">Register</div>
+    <main>
+        <!-- Hero Section -->
+        <header class="hero container">
+            <div class="obs-fade-up">
+                <span class="hero-badge">Enterprise Automation</span>
+                <h1>The Infinite Scale Protocol for <br><span class="text-gradient">Real Estate Meta Ads</span></h1>
+                <p>Stop wasting hours inside Ads Manager. RECC is the ultimate algorithmic campaign generator that allows elite real estate professionals to deploy, duplicate, and scale winning architectures instantly.</p>
+                <div class="hero-actions">
+                    <button class="btn-primary" onclick="openAuthModal('register')">Initialize Pipeline</button>
+                    <a href="#how-it-works" class="btn-primary btn-secondary">Explore Architecture</a>
                 </div>
-
-                <!-- Login Form -->
-                <form id="loginForm" class="auth-form active" action="/login" method="POST">
-                    <div class="input-group">
-                        <input type="email" name="email" placeholder="Email Address" required autocomplete="email">
-                    </div>
-                    <div class="input-group">
-                        <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 0.9rem;">
-                        <label class="custom-checkbox">
-                            <input type="checkbox" name="remember">
-                            <span class="checkmark"></span>
-                            <span class="label-text" style="transition: color 0.3s ease;">Remember Me</span>
-                        </label>
-                        <a href="#" onclick="openForgotModal(); return false;" style="color: var(--primary); text-decoration: none; font-weight: 500;">Forgot Password?</a>
-                    </div>
-                    <button type="submit" class="primary-btn">Secure Login</button>
-                </form>
-
-                <!-- Registration Form -->
-                <form id="registerForm" class="auth-form" action="/register" method="POST">
-                    <div class="input-group">
-                        <input type="text" name="invite_code" placeholder="Exclusive Invite Code" required style="border-color: var(--primary); background: rgba(35, 213, 213, 0.05); color: var(--primary);">
-                    </div>
-                    <div class="input-group">
-                        <input type="email" name="email" placeholder="Email Address" required autocomplete="email">
-                    </div>
-                    <div class="input-group">
-                        <input type="password" name="password" placeholder="Choose a Password" required autocomplete="new-password">
-                    </div>
-                    <button type="submit" class="primary-btn" style="background: rgba(35, 213, 213, 0.2); border: 1px solid var(--primary); color: #fff;">Create Account</button>
-                </form>
             </div>
+        </header>
+
+        <!-- Features Bento Grid -->
+        <section class="bento-section" id="features">
+            <div class="container">
+                <div class="section-header obs-fade-up">
+                    <h2>Engineered for Dominance</h2>
+                    <p>Every feature built to remove friction from your Meta Ads deployment workflow.</p>
+                </div>
+                
+                <div class="bento-grid">
+                    <!-- Large Card 1 -->
+                    <article class="glass-card bento-item item-large obs-fade-up">
+                        <div class="bento-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                        </div>
+                        <h3>Instant Campaign Generation</h3>
+                        <p>Our core algorithm dynamically injects your primary text and visual assets directly into a heavily optimized Meta Ads Manager Excel framework. Bypass the slow web interface entirely and generate publish-ready campaigns in seconds.</p>
+                    </article>
+                    
+                    <!-- Small Card 1 -->
+                    <article class="glass-card bento-item item-small obs-fade-up delay-1">
+                        <div class="bento-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </div>
+                        <h3>One-Click Duplication</h3>
+                        <p>Scale winning account architectures across multiple client pages instantly without rebuilding configurations from scratch.</p>
+                    </article>
+
+                    <!-- Small Card 2 -->
+                    <article class="glass-card bento-item item-small obs-fade-up">
+                        <div class="bento-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <h3>Isolated Tenants</h3>
+                        <p>Your data, profiles, and API connections are locked in a secure, isolated database environment strictly separated from other agencies.</p>
+                    </article>
+
+                    <!-- Large Card 2 -->
+                    <article class="glass-card bento-item item-large obs-fade-up delay-1">
+                        <div class="bento-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </div>
+                        <h3>Granular Ad-Set Logic</h3>
+                        <p>Pre-programmed with the highest converting parameters for real estate. Budgets, detailed targeting constraints, and placement optimizations are automatically hardcoded into your output to maximize ROAS.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workflow Section -->
+        <section class="workflow-section" id="how-it-works">
+            <div class="container">
+                <div class="section-header obs-fade-up">
+                    <h2>Deploy in Three Steps</h2>
+                    <p>A frictionless pipeline designed for speed.</p>
+                </div>
+                <div class="workflow-grid">
+                    <div class="glass-card step-card obs-fade-up">
+                        <div class="step-number">01</div>
+                        <h3>Configure Profile</h3>
+                        <p style="color: var(--text-secondary); margin-top: 10px;">Input your specific Page IDs, targeting regions, and daily budget constraints once.</p>
+                    </div>
+                    <div class="glass-card step-card obs-fade-up delay-1">
+                        <div class="step-number">02</div>
+                        <h3>Inject Creatives</h3>
+                        <p style="color: var(--text-secondary); margin-top: 10px;">Upload your listing images and primary ad copy into our processing engine.</p>
+                    </div>
+                    <div class="glass-card step-card obs-fade-up delay-2">
+                        <div class="step-number">03</div>
+                        <h3>Export & Dominate</h3>
+                        <p style="color: var(--text-secondary); margin-top: 10px;">Download the compiled Excel sheet and import directly into Meta Ads Manager.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Rich Context Article -->
+        <section class="seo-section">
+            <article class="container seo-article obs-fade-up">
+                <h2>Automated Real Estate Marketing Campaigns</h2>
+                <p>In the highly competitive digital landscape, real estate professionals require sophisticated tools to manage lead generation at scale. The <strong>Real Estate Campaign Creator (RECC)</strong> is a proprietary software solution engineered to bypass the manual labor associated with the Meta Ads Manager UI.</p>
+                
+                <h3>The Ultimate Meta Ads Generator for Realtors</h3>
+                <p>Traditional agency software forces you to manage campaigns click-by-click. RECC acts as a direct-to-database Excel pipeline. By generating compliant, pre-structured bulk import files, agencies can launch highly targeted property campaigns across dozens of pages simultaneously.</p>
+                
+                <h3>Scaling Real Estate Lead Generation</h3>
+                <p>Success in real estate advertising relies on speed to market and rigorous testing. With features like One-Click Profile Duplication, marketers can clone successful adset configurations—including budgets, demographics, and placements—reducing deployment times by up to 90%. Whether you are a solo agent or a multi-tenant agency, RECC is the definitive automated lead generation infrastructure.</p>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div style="font-family: 'Outfit'; font-weight: 800; font-size: 1.5rem; color: var(--text-primary); margin-bottom: 10px;">RECC</div>
+            <div>RoiEnvironment • Copyright © 2026. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         THE AUTH PORTAL (MODAL)
+         ========================================== -->
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-modal">
+            <button class="close-modal" onclick="closeAuthModal()">&times;</button>
             
-            <footer class="landing-footer">
-                <div>RoiEnvironment</div>
-                <div style="margin-top: 4px;">Copyright © 2026. All rights reserved.</div>
-            </footer>
-        </div>
-        
-    </div>
+            <h2>Access Terminal</h2>
+            
+            {% if error %}
+                <div class="error-msg" id="serverErrorMsg">{{ error }}</div>
+                <!-- Auto-open modal if there's a server error -->
+                <script>document.addEventListener("DOMContentLoaded", () => { document.getElementById('authOverlay').classList.add('active'); });</script>
+            {% endif %}
 
-    <!-- Forgot Password Modal -->
-    <div id="forgotModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
-        <div class="glass-panel" style="max-width: 400px; width: 90%; text-align: center; position: relative;">
-            <button onclick="closeForgotModal()" style="position: absolute; top: 15px; right: 20px; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;">&times;</button>
-            <h2 style="font-size: 1.5rem; margin-bottom: 10px;">Reset Password</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Enter your email to receive a secure reset link.</p>
-            <div id="forgotMsg" style="margin-bottom: 15px; font-size: 0.9rem; font-weight: 500;"></div>
-            <div class="input-group">
-                <input type="email" id="forgotEmail" placeholder="Your Email Address" required>
+            <div class="tabs">
+                <div class="tab-btn active" onclick="switchTab('login')">Log In</div>
+                <div class="tab-btn" onclick="switchTab('register')">Register</div>
             </div>
-            <button id="forgotBtn" onclick="sendResetLink()" class="primary-btn">Send Reset Link</button>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active" action="/login" method="POST">
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Email Address" required autocomplete="email">
+                </div>
+                <div class="input-group">
+                    <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="remember">
+                        <div class="checkmark"></div>
+                        <span>Remember Me</span>
+                    </label>
+                    <a href="#" onclick="openForgotModal(); return false;" style="color: var(--primary-accent); font-weight: 500; font-size: 0.9rem;">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Secure Login</button>
+            </form>
+
+            <!-- Registration Form -->
+            <form id="registerForm" class="auth-form" action="/register" method="POST">
+                <div class="input-group">
+                    <input type="text" name="invite_code" placeholder="Exclusive Invite Code" required style="border-color: var(--primary-accent); background: var(--primary-accent-glow);">
+                </div>
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Email Address" required autocomplete="email">
+                </div>
+                <div class="input-group">
+                    <input type="password" name="password" placeholder="Choose a Password" required autocomplete="new-password">
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Create Account</button>
+            </form>
+            
+            <!-- Forgot Password Internal State -->
+            <div id="forgotState" class="auth-form">
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px; text-align: center;">Enter your email to receive a secure reset link.</p>
+                <div id="forgotMsg" style="margin-bottom: 15px; font-size: 0.9rem; font-weight: 500; text-align: center;"></div>
+                <div class="input-group">
+                    <input type="email" id="forgotEmail" placeholder="Your Email Address" required>
+                </div>
+                <button id="forgotBtn" onclick="sendResetLink()" class="btn-primary" style="width: 100%; margin-bottom: 15px;">Send Reset Link</button>
+                <div style="text-align: center;">
+                    <a href="#" onclick="switchTab('login'); return false;" style="color: var(--text-secondary); font-size: 0.9rem;">&larr; Back to Login</a>
+                </div>
+            </div>
+
         </div>
     </div>
 
+    <!-- ==========================================
+         INTERACTIVE SCRIPTS
+         ========================================== -->
     <script>
+        /* Navbar Scroll Effect */
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 50) document.getElementById('navbar').classList.add('scrolled');
+            else document.getElementById('navbar').classList.remove('scrolled');
+        });
+
+        /* Intersection Observer for Scroll Animations */
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.obs-fade-up').forEach(el => observer.observe(el));
+
+        /* Modal & Tab Logic */
+        const authOverlay = document.getElementById('authOverlay');
+        
+        function openAuthModal(tab = 'login') {
+            authOverlay.classList.add('active');
+            switchTab(tab);
+        }
+        function closeAuthModal() {
+            authOverlay.classList.remove('active');
+            // Hide error message if user closes modal
+            const err = document.getElementById('serverErrorMsg');
+            if(err) err.style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        authOverlay.addEventListener('click', (e) => {
+            if(e.target === authOverlay) closeAuthModal();
+        });
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            
+            if (tab === 'login') {
+                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+                document.getElementById('loginForm').classList.add('active');
+            } else if (tab === 'register') {
+                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+                document.getElementById('registerForm').classList.add('active');
+            }
+        }
+        
         function openForgotModal() {
-            document.getElementById('forgotModal').style.display = 'flex';
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            document.getElementById('forgotState').classList.add('active');
             document.getElementById('forgotMsg').textContent = '';
             document.getElementById('forgotEmail').value = '';
         }
-        function closeForgotModal() {
-            document.getElementById('forgotModal').style.display = 'none';
-        }
+
         function sendResetLink() {
             const email = document.getElementById('forgotEmail').value.trim();
             if (!email) return;
@@ -282,7 +553,7 @@
                 btn.textContent = 'Send Reset Link';
                 btn.disabled = false;
                 if (data.success) {
-                    msg.style.color = '#23d5d5';
+                    msg.style.color = 'var(--primary-accent)';
                     msg.textContent = 'If that email exists, a reset link has been sent.';
                 } else {
                     msg.style.color = '#ff5555';
@@ -296,20 +567,7 @@
             });
         }
 
-        function switchTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
-            
-            if (tab === 'login') {
-                document.querySelectorAll('.tab-btn')[0].classList.add('active');
-                document.getElementById('loginForm').classList.add('active');
-            } else {
-                document.querySelectorAll('.tab-btn')[1].classList.add('active');
-                document.getElementById('registerForm').classList.add('active');
-            }
-        }
-
-        // Custom Neural Network Visualization Animation
+        /* Custom Neural Network Visualization Animation */
         const canvas = document.getElementById('neural-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -326,9 +584,9 @@
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.radius = Math.random() * 2 + 1;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.radius = Math.random() * 1.5 + 0.5;
             }
             update() {
                 this.x += this.vx;
@@ -340,31 +598,24 @@
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
                 const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches;
-                ctx.fillStyle = isLightMode ? `rgba(35, 213, 213, 0.8)` : `rgba(35, 213, 213, 0.5)`;
+                ctx.fillStyle = isLightMode ? `rgba(2, 132, 199, 0.6)` : `rgba(35, 213, 213, 0.5)`;
                 ctx.fill();
             }
         }
 
-        for (let i = 0; i < 80; i++) {
-            particles.push(new Node());
-        }
+        // Adjust particle density based on screen size
+        const nodeCount = window.innerWidth < 768 ? 40 : 80;
+        for (let i = 0; i < nodeCount; i++) particles.push(new Node());
 
         let mouse = { x: null, y: null };
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
-        });
-        window.addEventListener('mouseout', () => {
-            mouse.x = null;
-            mouse.y = null;
-        });
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
             
-            // Get CSS variable for color (works dynamically based on media query but using solid JS for perf)
             const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches;
-            const lineColor = isLightMode ? '35, 213, 213' : '35, 213, 213'; 
+            const lineColor = isLightMode ? '2, 132, 199' : '35, 213, 213'; 
 
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
@@ -377,15 +628,14 @@
 
                     if (distance < 120) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(${lineColor}, ${1 - distance / 120})`;
-                        ctx.lineWidth = 0.8;
+                        ctx.strokeStyle = `rgba(${lineColor}, ${0.8 - distance / 150})`;
+                        ctx.lineWidth = 0.6;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
                     }
                 }
 
-                // Interactive Mouse Connection
                 if (mouse.x != null && mouse.y != null) {
                     const dx = particles[i].x - mouse.x;
                     const dy = particles[i].y - mouse.y;
@@ -393,7 +643,7 @@
                     if (distance < 150) {
                         ctx.beginPath();
                         ctx.strokeStyle = `rgba(${lineColor}, ${1 - distance / 150})`;
-                        ctx.lineWidth = 1.2;
+                        ctx.lineWidth = 1;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(mouse.x, mouse.y);
                         ctx.stroke();
