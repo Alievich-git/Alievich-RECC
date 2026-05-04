@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RECC | Authentication</title>
+    <title>RECC | Automate Your Real Estate Empire</title>
     
     <!-- Core SEO & Performance Meta -->
     <meta name="description" content="Secure Login for the RECC Dashboard. Automate your Meta Real Estate Campaigns instantly.">
@@ -24,112 +24,223 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@800;900&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/styles.css">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
     <style>
+        :root {
+            /* Default Dark Mode Theme */
+            --bg-color: #0A0F1A;
+            --text-color: #FFFFFF;
+            --text-muted-color: rgba(255, 255, 255, 0.7);
+            --panel-bg: rgba(15, 22, 36, 0.6);
+            --panel-border: rgba(255, 255, 255, 0.1);
+            --feature-bg: rgba(255, 255, 255, 0.02);
+            --feature-hover: rgba(35, 213, 213, 0.05);
+            --input-bg: rgba(255, 255, 255, 0.05);
+            --tab-bg: rgba(0, 0, 0, 0.3);
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --net-color: 35, 213, 213; /* #23d5d5 */
+        }
+        
+        @media (prefers-color-scheme: light) {
+            :root {
+                /* Light Mode Theme */
+                --bg-color: #F4F7FB;
+                --text-color: #1A2233;
+                --text-muted-color: rgba(26, 34, 51, 0.7);
+                --panel-bg: rgba(255, 255, 255, 0.8);
+                --panel-border: rgba(35, 213, 213, 0.2);
+                --feature-bg: rgba(255, 255, 255, 0.9);
+                --feature-hover: rgba(35, 213, 213, 0.1);
+                --input-bg: rgba(0, 0, 0, 0.03);
+                --tab-bg: rgba(0, 0, 0, 0.05);
+                --shadow-color: rgba(35, 213, 213, 0.15);
+                --net-color: 35, 213, 213;
+            }
+        }
+
         body { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            min-height: 100vh; 
-            overflow: hidden; 
+            display: block; 
+            overflow-x: hidden; 
             margin: 0; 
-            padding: 20px; 
-            box-sizing: border-box; 
-            flex-direction: column;
-            background-color: var(--bg-dark);
-        }
-        #particles-js { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-        .ambient-glow { position: absolute; z-index: 0; }
-        
-        .login-container { 
-            max-width: 480px; 
-            width: 100%; 
-            position: relative; 
-            z-index: 10; 
-            animation: fadeUp 0.8s ease forwards;
-            animation-delay: 0.2s;
-            opacity: 0;
+            padding: 0; 
+            min-height: 100vh; 
+            background-color: var(--bg-color); 
+            color: var(--text-color);
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
         
-        .auth-panel { text-align: center; }
-        .auth-panel h2 { justify-content: center; margin-bottom: 30px; border-bottom: none; font-size: 1.8rem; letter-spacing: 2px;}
-        .tabs { display: flex; margin-bottom: 25px; border-radius: 12px; background: rgba(0,0,0,0.3); padding: 5px; }
-        .tab-btn { flex: 1; padding: 12px; border-radius: 8px; text-align: center; cursor: pointer; color: var(--text-muted); font-weight: 600; transition: all 0.3s ease; }
+        #neural-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        
+        /* Layout */
+        .landing-layout { display: flex; min-height: 100vh; position: relative; z-index: 10; }
+        
+        /* Hero Section */
+        .landing-hero {
+            flex: 1.2;
+            display: flex;
+            align-items: center;
+            padding: 60px;
+            background: linear-gradient(135deg, var(--bg-color) 0%, transparent 100%);
+            backdrop-filter: blur(5px);
+            border-right: 1px solid var(--panel-border);
+        }
+        .hero-content { max-width: 600px; margin: 0 auto; animation: fadeUp 1s ease forwards; }
+        .landing-title { font-size: 3.5rem; line-height: 1.1; font-weight: 800; margin-bottom: 20px; font-family: 'Outfit', sans-serif; color: var(--text-color); letter-spacing: -1px; }
+        .text-gradient { background: linear-gradient(135deg, var(--primary), #4f83cc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .landing-subtitle { font-size: 1.15rem; color: var(--text-muted-color); line-height: 1.6; margin-bottom: 40px; font-family: 'General Sans', sans-serif; }
+        
+        /* Features */
+        .feature-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 20px; }
+        .feature-list li {
+            display: flex; gap: 15px; align-items: flex-start; color: var(--text-muted-color); font-size: 0.95rem; line-height: 1.4;
+            background: var(--feature-bg); padding: 15px; border-radius: 12px; border: 1px solid var(--panel-border); transition: all 0.3s;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+        .feature-list li:hover { background: var(--feature-hover); border-color: rgba(35, 213, 213, 0.4); transform: translateX(5px); box-shadow: 0 8px 25px rgba(35, 213, 213, 0.2); }
+        .feature-list strong { color: var(--text-color); font-size: 1.05rem; display: block; margin-bottom: 4px; }
+        .feature-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(35, 213, 213, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        
+        /* Auth Gateway */
+        .landing-auth { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; position: relative; }
+        .landing-auth .auth-panel { width: 100%; max-width: 440px; animation: fadeUp 1.2s ease forwards; background: var(--panel-bg); border: 1px solid var(--panel-border); box-shadow: 0 15px 35px var(--shadow-color); }
+        .landing-footer { position: absolute; bottom: 20px; text-align: center; color: var(--text-muted-color); font-size: 0.75rem; animation: fadeUp 1.5s ease forwards; opacity: 0.6; }
+        
+        /* Auth Form Internals */
+        .auth-panel h2 { justify-content: center; margin-bottom: 30px; border-bottom: none; font-size: 1.8rem; letter-spacing: 2px; color: var(--text-color); }
+        .tabs { display: flex; margin-bottom: 25px; border-radius: 12px; background: var(--tab-bg); padding: 5px; }
+        .tab-btn { flex: 1; padding: 12px; border-radius: 8px; text-align: center; cursor: pointer; color: var(--text-muted-color); font-weight: 600; transition: all 0.3s ease; }
         .tab-btn.active { background: rgba(35, 213, 213, 0.15); color: var(--primary); box-shadow: 0 0 10px rgba(35, 213, 213, 0.1); }
         .auth-form { display: none; }
         .auth-form.active { display: block; animation: slideDown 0.3s ease forwards; }
-        .error-msg { background: rgba(255,50,50,0.1); border: 1px solid rgba(255,50,50,0.3); color: #ff5555; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: 500; font-size: 0.9rem; }
+        .error-msg { background: rgba(255,50,50,0.1); border: 1px solid rgba(255,50,50,0.3); color: #ff5555; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: 500; font-size: 0.9rem; text-align: center; }
         
+        /* Overriding global input styles for light mode */
+        .input-group input { background: var(--input-bg); color: var(--text-color); border: 1px solid var(--panel-border); }
+        .input-group input:focus { border-color: var(--primary); background: rgba(35, 213, 213, 0.05); }
+
         /* Custom Checkbox */
-        .custom-checkbox { position: relative; padding-left: 30px; cursor: pointer; user-select: none; color: var(--text-muted); display: flex; align-items: center; font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease; }
+        .custom-checkbox { position: relative; padding-left: 30px; cursor: pointer; user-select: none; color: var(--text-muted-color); display: flex; align-items: center; font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease; }
         .custom-checkbox input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
-        .checkmark { position: absolute; left: 0; top: 50%; transform: translateY(-50%); height: 18px; width: 18px; background-color: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; transition: all 0.3s ease; }
+        .checkmark { position: absolute; left: 0; top: 50%; transform: translateY(-50%); height: 18px; width: 18px; background-color: var(--tab-bg); border: 1px solid var(--panel-border); border-radius: 4px; transition: all 0.3s ease; }
         .custom-checkbox:hover .checkmark { border-color: rgba(35, 213, 213, 0.5); }
         .custom-checkbox input:checked ~ .checkmark { background-color: rgba(35, 213, 213, 0.2); border-color: var(--primary); box-shadow: 0 0 10px rgba(35, 213, 213, 0.2); }
         .checkmark:after { content: ""; position: absolute; display: none; }
         .custom-checkbox input:checked ~ .checkmark:after { display: block; }
         .custom-checkbox .checkmark:after { left: 5px; top: 1px; width: 5px; height: 10px; border: solid var(--primary); border-width: 0 2px 2px 0; transform: rotate(45deg); }
         .custom-checkbox input:checked ~ span.label-text { color: var(--primary); }
+
+        /* Responsive Media Queries */
+        @media (max-width: 992px) {
+            .landing-layout { flex-direction: column; }
+            .landing-hero { padding: 40px 20px; border-right: none; border-bottom: 1px solid var(--panel-border); }
+            .landing-title { font-size: 2.8rem; }
+            .landing-auth { padding: 40px 20px; }
+            .landing-footer { position: relative; margin-top: 40px; bottom: 0; }
+        }
+        @media (max-width: 576px) {
+            .landing-title { font-size: 2.2rem; }
+        }
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
-    <div class="ambient-glow"></div>
+    <canvas id="neural-canvas"></canvas>
 
-    <!-- Match the main dashboard hero header perfectly -->
-    <header class="hero-header fade-up" style="position: relative; z-index: 10;">
-        <a href="https://alievich.com" target="_blank" style="display: inline-block;">
-            <img src="/static/images/alivich-logo.webp" alt="Alievich Brand Logo" class="top-brand-logo">
-        </a>
-        <h1 class="logo-title">RECC</h1>
-        <p class="hero-subtitle">REAL ESTATE CAMPAIGN CREATOR</p>
-        <p style="margin-top: 10px; font-size: 0.9rem; color: rgba(138, 159, 194, 0.7); font-family: 'General Sans', sans-serif;">Built by <a href="https://alievich.com" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 500;">Ali Alievich <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 2px;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a></p>
-    </header>
-
-    <div class="login-container">
-        <div class="glass-panel auth-panel">
-            {% if error %}
-                <div class="error-msg">{{ error }}</div>
-            {% endif %}
-
-            <div class="tabs">
-                <div class="tab-btn active" onclick="switchTab('login')">Log In</div>
-                <div class="tab-btn" onclick="switchTab('register')">Register</div>
+    <div class="landing-layout">
+        
+        <!-- Left Side: Pitch -->
+        <div class="landing-hero">
+            <div class="hero-content">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                    <img src="/static/images/alivich-logo.webp" alt="Alievich Brand Logo" style="width: 50px; border-radius: 12px; box-shadow: 0 4px 15px var(--shadow-color);">
+                    <span style="font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 2rem; color: var(--text-color); letter-spacing: 2px;">RECC</span>
+                </div>
+                
+                <h1 class="landing-title">Automate Your <br><span class="text-gradient">Real Estate Empire</span></h1>
+                <p class="landing-subtitle">The ultimate Meta Ads campaign creator designed exclusively for real estate professionals. Generate, duplicate, and launch high-converting campaigns instantly.</p>
+                
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                        </div>
+                        <div>
+                            <strong>Instant Campaign Generation</strong>
+                            Stop building ads manually. Automatically populate complex campaigns directly to an Excel pipeline.
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </div>
+                        <div>
+                            <strong>One-Click Duplication</strong>
+                            Scale winning profiles seamlessly. Clone all configurations and ad assets across multiple properties.
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <div>
+                            <strong>Secure Private Pipeline</strong>
+                            Your data and credentials remain exclusively yours, locked down within a fully isolated multi-tenant architecture.
+                        </div>
+                    </li>
+                </ul>
             </div>
-
-            <!-- Login Form -->
-            <form id="loginForm" class="auth-form active" action="/login" method="POST">
-                <div class="input-group">
-                    <input type="email" name="email" placeholder="Email Address" required autocomplete="email">
-                </div>
-                <div class="input-group">
-                    <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 0.9rem;">
-                    <label class="custom-checkbox">
-                        <input type="checkbox" name="remember">
-                        <span class="checkmark"></span>
-                        <span class="label-text" style="transition: color 0.3s ease;">Remember Me</span>
-                    </label>
-                    <a href="#" onclick="openForgotModal(); return false;" style="color: var(--primary); text-decoration: none;">Forgot Password?</a>
-                </div>
-                <button type="submit" class="primary-btn">Secure Login</button>
-            </form>
-
-            <!-- Registration Form -->
-            <form id="registerForm" class="auth-form" action="/register" method="POST">
-                <div class="input-group">
-                    <input type="text" name="invite_code" placeholder="Exclusive Invite Code" required style="border-color: var(--primary); background: rgba(35, 213, 213, 0.05); color: var(--primary);">
-                </div>
-                <div class="input-group">
-                    <input type="email" name="email" placeholder="Email Address" required autocomplete="email">
-                </div>
-                <div class="input-group">
-                    <input type="password" name="password" placeholder="Choose a Password" required autocomplete="new-password">
-                </div>
-                <button type="submit" class="primary-btn" style="background: rgba(35, 213, 213, 0.2); border: 1px solid var(--primary); color: #fff;">Create Account</button>
-            </form>
         </div>
+
+        <!-- Right Side: Auth Gateway -->
+        <div class="landing-auth">
+            <div class="glass-panel auth-panel">
+                {% if error %}
+                    <div class="error-msg">{{ error }}</div>
+                {% endif %}
+
+                <div class="tabs">
+                    <div class="tab-btn active" onclick="switchTab('login')">Log In</div>
+                    <div class="tab-btn" onclick="switchTab('register')">Register</div>
+                </div>
+
+                <!-- Login Form -->
+                <form id="loginForm" class="auth-form active" action="/login" method="POST">
+                    <div class="input-group">
+                        <input type="email" name="email" placeholder="Email Address" required autocomplete="email">
+                    </div>
+                    <div class="input-group">
+                        <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 0.9rem;">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" name="remember">
+                            <span class="checkmark"></span>
+                            <span class="label-text" style="transition: color 0.3s ease;">Remember Me</span>
+                        </label>
+                        <a href="#" onclick="openForgotModal(); return false;" style="color: var(--primary); text-decoration: none; font-weight: 500;">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="primary-btn">Secure Login</button>
+                </form>
+
+                <!-- Registration Form -->
+                <form id="registerForm" class="auth-form" action="/register" method="POST">
+                    <div class="input-group">
+                        <input type="text" name="invite_code" placeholder="Exclusive Invite Code" required style="border-color: var(--primary); background: rgba(35, 213, 213, 0.05); color: var(--primary);">
+                    </div>
+                    <div class="input-group">
+                        <input type="email" name="email" placeholder="Email Address" required autocomplete="email">
+                    </div>
+                    <div class="input-group">
+                        <input type="password" name="password" placeholder="Choose a Password" required autocomplete="new-password">
+                    </div>
+                    <button type="submit" class="primary-btn" style="background: rgba(35, 213, 213, 0.2); border: 1px solid var(--primary); color: #fff;">Create Account</button>
+                </form>
+            </div>
+            
+            <footer class="landing-footer">
+                <div>RoiEnvironment</div>
+                <div style="margin-top: 4px;">Copyright © 2026. All rights reserved.</div>
+            </footer>
+        </div>
+        
     </div>
 
     <!-- Forgot Password Modal -->
@@ -198,21 +309,100 @@
             }
         }
 
-        if(window.particlesJS) {
-            particlesJS("particles-js", {
-                "particles": {
-                    "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
-                    "color": { "value": "#23d5d5" },
-                    "shape": { "type": "circle" },
-                    "opacity": { "value": 0.3, "random": false },
-                    "size": { "value": 2, "random": true },
-                    "line_linked": { "enable": true, "distance": 150, "color": "#23d5d5", "opacity": 0.2, "width": 1 },
-                    "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
-                },
-                "interactivity": { "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } },
-                "retina_detect": true
-            });
+        // Custom Neural Network Visualization Animation
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+        
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
         }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Node {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches;
+                ctx.fillStyle = isLightMode ? `rgba(35, 213, 213, 0.8)` : `rgba(35, 213, 213, 0.5)`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 80; i++) {
+            particles.push(new Node());
+        }
+
+        let mouse = { x: null, y: null };
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Get CSS variable for color (works dynamically based on media query but using solid JS for perf)
+            const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches;
+            const lineColor = isLightMode ? '35, 213, 213' : '35, 213, 213'; 
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(${lineColor}, ${1 - distance / 120})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+
+                // Interactive Mouse Connection
+                if (mouse.x != null && mouse.y != null) {
+                    const dx = particles[i].x - mouse.x;
+                    const dy = particles[i].y - mouse.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(${lineColor}, ${1 - distance / 150})`;
+                        ctx.lineWidth = 1.2;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
     </script>
 </body>
 </html>
