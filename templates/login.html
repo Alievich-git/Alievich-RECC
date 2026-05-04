@@ -167,9 +167,13 @@
             background: var(--primary-accent-glow); color: var(--primary-accent); border: 1px solid rgba(35, 213, 213, 0.2);
             margin-bottom: 24px; letter-spacing: 1px; text-transform: uppercase;
         }
-        .hero h1 { font-size: clamp(3rem, 6vw, 5.5rem); letter-spacing: -2px; margin-bottom: 24px; max-width: 1000px; margin-inline: auto; }
-        .hero p { font-size: clamp(1.1rem, 2vw, 1.4rem); color: var(--text-secondary); max-width: 700px; margin: 0 auto 40px auto; }
+        .hero h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); letter-spacing: -2px; margin-bottom: 24px; max-width: 1000px; margin-inline: auto; line-height: 1.1; }
+        .hero p { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--text-secondary); max-width: 800px; margin: 0 auto 40px auto; }
         .hero-actions { display: flex; gap: 16px; justify-content: center; }
+        
+        .nav-annotation { display: none; color: var(--primary-accent); font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 600; font-style: italic; animation: pulse-op 1.5s infinite alternate; }
+        @keyframes pulse-op { 0% { opacity: 0.4; } 100% { opacity: 1; text-shadow: 0 0 8px var(--primary-accent-glow); } }
+        @media(min-width: 768px) { .nav-annotation { display: inline-block; } }
 
         /* ------------------------------------------------------------------
            BENTO GRID (FEATURES)
@@ -289,7 +293,8 @@
                 <img src="/static/images/alivich-logo.webp" alt="Alievich">
                 RECC
             </div>
-            <div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span class="nav-annotation">Login or Register Here &nearr;</span>
                 <button class="btn-primary" onclick="openAuthModal('login')" style="padding: 10px 20px; font-size: 0.9rem;">Client Portal</button>
             </div>
         </div>
@@ -299,9 +304,9 @@
         <!-- Hero Section -->
         <header class="hero container">
             <div class="obs-fade-up">
-                <span class="hero-badge">Enterprise Automation</span>
-                <h1>The Infinite Scale Protocol for <br><span class="text-gradient">Real Estate Meta Ads</span></h1>
-                <p>Stop wasting hours inside Ads Manager. RECC is the ultimate algorithmic campaign generator that allows elite real estate professionals to deploy, duplicate, and scale winning architectures instantly.</p>
+                <span class="hero-badge">Built on Years of Meta Ads Testing</span>
+                <h1>RECC: Launch High-Converting <br><span class="text-gradient">Meta Campaigns in Under 60 Seconds</span></h1>
+                <p>Stop building campaigns manually. Bring your visuals and primary text. RECC handles the complex campaign structures, targeting, and deployment instantly.</p>
                 <div class="hero-actions">
                     <button class="btn-primary" onclick="openAuthModal('register')">Initialize Pipeline</button>
                     <a href="#how-it-works" class="btn-primary btn-secondary">Explore Architecture</a>
@@ -321,37 +326,37 @@
                     <!-- Large Card 1 -->
                     <article class="glass-card bento-item item-large obs-fade-up">
                         <div class="bento-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                         </div>
-                        <h3>Instant Campaign Generation</h3>
-                        <p>Our core algorithm dynamically injects your primary text and visual assets directly into a heavily optimized Meta Ads Manager Excel framework. Bypass the slow web interface entirely and generate publish-ready campaigns in seconds.</p>
+                        <h3>Manage Unlimited Client Profiles</h3>
+                        <p>Built for agencies and performance marketers. Switch seamlessly between unlimited profiles. Every client's credentials and Page IDs are saved securely for instant access.</p>
                     </article>
                     
                     <!-- Small Card 1 -->
                     <article class="glass-card bento-item item-small obs-fade-up delay-1">
                         <div class="bento-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
                         </div>
-                        <h3>One-Click Duplication</h3>
-                        <p>Scale winning account architectures across multiple client pages instantly without rebuilding configurations from scratch.</p>
+                        <h3>Launch From Your Phone</h3>
+                        <p>Got the visual and ad text? Launch the entire campaign structure directly from your mobile browser in less than a minute.</p>
                     </article>
 
                     <!-- Small Card 2 -->
                     <article class="glass-card bento-item item-small obs-fade-up">
                         <div class="bento-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                         </div>
-                        <h3>Isolated Tenants</h3>
-                        <p>Your data, profiles, and API connections are locked in a secure, isolated database environment strictly separated from other agencies.</p>
+                        <h3>5-Minute Setup</h3>
+                        <p>A one-time, 5-minute configuration is all it takes. Once your profile is set, you never touch the backend setup again.</p>
                     </article>
 
                     <!-- Large Card 2 -->
                     <article class="glass-card bento-item item-large obs-fade-up delay-1">
                         <div class="bento-icon">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                         </div>
-                        <h3>Granular Ad-Set Logic</h3>
-                        <p>Pre-programmed with the highest converting parameters for real estate. Budgets, detailed targeting constraints, and placement optimizations are automatically hardcoded into your output to maximize ROAS.</p>
+                        <h3>Years of Testing, Hardcoded.</h3>
+                        <p>We spent years testing and scaling to figure out the exact campaign structures that generate the highest real estate results. That proven architecture is now compacted into one single click.</p>
                     </article>
                 </div>
             </div>
@@ -367,18 +372,18 @@
                 <div class="workflow-grid">
                     <div class="glass-card step-card obs-fade-up">
                         <div class="step-number">01</div>
-                        <h3>Configure Profile</h3>
-                        <p style="color: var(--text-secondary); margin-top: 10px;">Input your specific Page IDs, targeting regions, and daily budget constraints once.</p>
+                        <h3>One-Time Setup</h3>
+                        <p style="color: var(--text-secondary); margin-top: 10px;">Complete the 5-minute configuration with your credentials. You only do this once.</p>
                     </div>
                     <div class="glass-card step-card obs-fade-up delay-1">
                         <div class="step-number">02</div>
-                        <h3>Inject Creatives</h3>
-                        <p style="color: var(--text-secondary); margin-top: 10px;">Upload your listing images and primary ad copy into our processing engine.</p>
+                        <h3>Upload Visuals & Text</h3>
+                        <p style="color: var(--text-secondary); margin-top: 10px;">Just drop in your property images and paste your primary ad copy.</p>
                     </div>
                     <div class="glass-card step-card obs-fade-up delay-2">
                         <div class="step-number">03</div>
-                        <h3>Export & Dominate</h3>
-                        <p style="color: var(--text-secondary); margin-top: 10px;">Download the compiled Excel sheet and import directly into Meta Ads Manager.</p>
+                        <h3>Deploy & Dominate</h3>
+                        <p style="color: var(--text-secondary); margin-top: 10px;">Click launch. Your highly-structured campaign is instantly pushed and ready inside your Ads Manager.</p>
                     </div>
                 </div>
             </div>
@@ -387,14 +392,16 @@
         <!-- SEO Rich Context Article -->
         <section class="seo-section">
             <article class="container seo-article obs-fade-up">
-                <h2>Automated Real Estate Marketing Campaigns</h2>
-                <p>In the highly competitive digital landscape, real estate professionals require sophisticated tools to manage lead generation at scale. The <strong>Real Estate Campaign Creator (RECC)</strong> is a proprietary software solution engineered to bypass the manual labor associated with the Meta Ads Manager UI.</p>
+                <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 50px;">One Platform to <span class="text-gradient">Automate the Grind.</span></h2>
                 
-                <h3>The Ultimate Meta Ads Generator for Realtors</h3>
-                <p>Traditional agency software forces you to manage campaigns click-by-click. RECC acts as a direct-to-database Excel pipeline. By generating compliant, pre-structured bulk import files, agencies can launch highly targeted property campaigns across dozens of pages simultaneously.</p>
+                <h3>For Performance Marketers</h3>
+                <p>Stop losing hours to manual campaign creation in the corporate grind. Reclaim your time to focus on strategy.</p>
                 
-                <h3>Scaling Real Estate Lead Generation</h3>
-                <p>Success in real estate advertising relies on speed to market and rigorous testing. With features like One-Click Profile Duplication, marketers can clone successful adset configurations—including budgets, demographics, and placements—reducing deployment times by up to 90%. Whether you are a solo agent or a multi-tenant agency, RECC is the definitive automated lead generation infrastructure.</p>
+                <h3>For Scaling Agencies</h3>
+                <p>Handle dozens of clients at once. Deliver incredibly fast results with perfect structural consistency across every single account.</p>
+                
+                <h3>For Large Corporates</h3>
+                <p>Cut the manual labor. Save thousands of employee hours so your team can work on what actually drives revenue.</p>
             </article>
         </section>
     </main>
