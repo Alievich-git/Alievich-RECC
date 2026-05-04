@@ -422,4 +422,27 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
             btn.textContent = 'Save Changes';
         });
     }
+
+    window.executeProfileDuplication = function(id) {
+        if(!confirm("Are you sure you want to duplicate this profile and its credentials?")) return;
+        
+        const formData = new URLSearchParams();
+        formData.append('profile_id', id);
+        
+        fetch('/api/duplicate_profile', {
+            method: 'POST',
+            body: formData
+        }).then(async res => {
+            const text = await res.text();
+            try { return JSON.parse(text); } catch(e) { throw new Error('Bad JSON'); }
+        }).then(data => {
+            if(data.success) {
+                window.location.reload();
+            } else {
+                alert(data.message || 'Error duplicating profile');
+            }
+        }).catch(err => {
+            alert("Network Error");
+        });
+    }
 });

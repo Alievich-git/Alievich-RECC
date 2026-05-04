@@ -312,6 +312,32 @@ def rename_profile():
     
     return jsonify({'success': True})
 
+@app.route('/api/duplicate_profile', methods=['POST'])
+def duplicate_profile():
+    profile_id = request.form.get('profile_id')
+    
+    if not profile_id:
+        return jsonify({'success': False, 'message': 'Profile ID is required'})
+        
+    db = get_db()
+    # Fetch the existing profile
+    profile = db.execute('SELECT * FROM profiles WHERE id = ? AND user_id = ?', (profile_id, session['user_id'])).fetchone()
+    if not profile:
+        db.close()
+        return jsonify({'success': False, 'message': 'Profile not found or unauthorized'})
+        
+    new_name = profile['name'] + ' (Copy)'
+    
+    # Insert new profile with copied data
+    db.execute(
+        'INSERT INTO profiles (user_id, name, meta_app_id, meta_app_secret, access_token, ad_account_id, page_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        (session['user_id'], new_name, profile['meta_app_id'], profile['meta_app_secret'], profile['access_token'], profile['ad_account_id'], profile['page_id'])
+    )
+    db.commit()
+    db.close()
+    
+    return jsonify({'success': True})
+
 @app.route('/api/create_profile', methods=['POST'])
 def create_profile():
     name = request.form.get('name', '').strip()
