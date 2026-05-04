@@ -242,6 +242,9 @@ ${result.data.ad_ids.map(id => `  - ${id}`).join('\n')}
             if (!profileContainer.contains(e.target)) {
                 profileDropdown.style.display = 'none';
             }
+            if (!e.target.closest('.profile-action-menu') && !e.target.closest('button[title="Options"]')) {
+                document.querySelectorAll('.profile-action-menu').forEach(m => m.style.display = 'none');
+            }
         });
     }
 
