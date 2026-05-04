@@ -159,7 +159,8 @@
         .navbar.scrolled { padding: 12px 0; background: var(--surface-color); border-bottom: 1px solid var(--surface-border); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         .brand { display: flex; align-items: center; gap: 12px; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.5rem; letter-spacing: 1px; }
-        .brand img { width: 36px; border-radius: 8px; }
+        .brand img { width: 36px; border-radius: 8px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .brand:hover img { transform: scale(1.05); box-shadow: 0 0 15px var(--primary-accent-glow); }
         
         /* ------------------------------------------------------------------
            HERO SECTION 
@@ -168,7 +169,7 @@
         .hero-badge {
             display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
             background: var(--primary-accent-glow); color: var(--primary-accent); border: 1px solid rgba(35, 213, 213, 0.2);
-            margin-bottom: 24px; letter-spacing: 1px; text-transform: uppercase;
+            width: fit-content; margin: 0 auto 24px auto; letter-spacing: 1px; text-transform: uppercase;
         }
         .hero h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); letter-spacing: -2px; margin-bottom: 24px; max-width: 1000px; margin-inline: auto; line-height: 1.1; }
         .hero p { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--text-secondary); max-width: 800px; margin: 0 auto 40px auto; }

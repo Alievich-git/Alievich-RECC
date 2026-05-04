@@ -51,7 +51,7 @@ body {
 .top-brand-logo:hover {
     opacity: 1;
     transform: translateY(-2px) scale(1.02);
-    filter: drop-shadow(0 0 20px rgba(35, 213, 213, 0.5));
+    filter: drop-shadow(0 0 25px rgba(35, 213, 213, 0.8));
 }
 .logo-title {
     font-family: 'Outfit', sans-serif;
