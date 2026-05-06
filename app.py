@@ -457,6 +457,26 @@ def deploy_campaign():
                 ]
             }
 
+        property_type = data.get('property_type')
+        if property_type == 'commercial':
+            config['targeting']['flexible_spec'] = [
+                {
+                    "behaviors": [{"id":"6002714898572","name":"Small business owners"}],
+                    "interests": [
+                        {"id":"6002975543459","name":"Real estate investment trust"},
+                        {"id":"6003091806216","name":"Commercial property"},
+                        {"id":"6003388314512","name":"Investment"},
+                        {"id":"6003446239080","name":"Real estate investing"},
+                        {"id":"6003462661944","name":"Trade"},
+                        {"id":"6003587074473","name":"Investor"},
+                        {"id":"6014673805956","name":"Return on investment"}
+                    ],
+                    "work_positions": [
+                        {"id":"104080079627441","name":"Investor"}
+                    ]
+                }
+            ]
+
         # 2. Handle Files
         files_data = data.get('files_base64', [])
         media_files = []
