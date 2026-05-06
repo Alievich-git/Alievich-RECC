@@ -167,6 +167,14 @@
                 </div>
                 
                 <div class="input-group">
+                    <label>Target Location</label>
+                    <select name="target_location" id="target_location" required>
+                        <option value="cairo">Cairo, Egypt (Default)</option>
+                        <option value="north_coast">North Coast (Alex, Cairo, Stella, El Gouna)</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
                     <label>Daily Budget per creative <span class="help-toggle" onclick="toggleHelp('budget-help')">Currency Match Required <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></span></label>
                     <div style="display: flex; gap: 10px;">
                         <input type="number" id="daily_budget" name="daily_budget" placeholder="350" min="1" step="1" required style="flex: 2;" onkeydown="return event.key !== '.' && event.key !== 'e'">

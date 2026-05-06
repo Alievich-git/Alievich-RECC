@@ -427,6 +427,24 @@ def deploy_campaign():
             # If the user inputs 350 (meaning 350 EGP), we must multiply by 100 internally -> 35000
             config['daily_budget'] = int(float(daily_budget) * 100)
 
+        target_location = data.get('target_location')
+        if target_location == 'north_coast':
+            config['targeting']['geo_locations'] = {
+                "cities": [
+                    {"key": "656306", "radius": 20, "distance_unit": "mile"}, # Alexandria
+                    {"key": "658536", "radius": 35, "distance_unit": "mile"}, # Cairo
+                    {"key": "668803", "radius": 30, "distance_unit": "mile"}  # Sidi Abd El-Rahman (Stella)
+                ],
+                "custom_locations": [
+                    {
+                        "latitude": 27.3942,
+                        "longitude": 33.6782,
+                        "radius": 2,
+                        "distance_unit": "mile"
+                    } # El Gouna
+                ]
+            }
+
         # 2. Handle Files
         files_data = data.get('files_base64', [])
         media_files = []
