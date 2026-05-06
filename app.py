@@ -444,6 +444,18 @@ def deploy_campaign():
                     } # El Gouna
                 ]
             }
+        elif target_location == 'gcc':
+            config['targeting']['geo_locations'] = {
+                "countries": ["AE", "KW", "QA"],
+                "regions": [
+                    {"key": "3202"} # Eastern Province, Saudi Arabia
+                ],
+                "cities": [
+                    {"key": "2116519", "radius": 25, "distance_unit": "mile"}, # Jeddah
+                    {"key": "2116956", "radius": 25, "distance_unit": "mile"}, # Mecca
+                    {"key": "2117479", "radius": 25, "distance_unit": "mile"}  # Riyadh
+                ]
+            }
 
         # 2. Handle Files
         files_data = data.get('files_base64', [])
